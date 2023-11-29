@@ -1,4 +1,4 @@
-package dslite.gui.menu;
+package dslite.ui.menu;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 public final class Arrow extends ImageView {
 
     private final boolean previous;
-    private static final String PATH = "/dslite/gui/play_inactive.png";
+    private static final String PATH = "/dslite/ui/play_inactive.png";
     private static final Image IMG = new Image(Arrow.class.getResource(PATH).toExternalForm());
 
     /**

@@ -30,7 +30,7 @@
             <StackPane.margin>
                 <Insets left="5.0"/>
             </StackPane.margin>
-            <Image url="@gui/icon.png"/>
+            <Image url="@ui/icon.png"/>
         </ImageView>
         <Label alignment="CENTER" mouseTransparent="true" prefHeight="18.0" prefWidth="98.0"
                text="Don't Starve 2D">

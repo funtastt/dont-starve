@@ -1,4 +1,4 @@
-package dslite.gui.menu;
+package dslite.ui.menu;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,7 +1,7 @@
 package dslite.controllers;
 
 import dslite.GameLauncher;
-import dslite.gui.menu.ArrowMenu;
+import dslite.ui.menu.ArrowMenu;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -86,7 +86,7 @@ public final class MenuController {
         gameStage.setWidth(1600.0);
         gameStage.setHeight(900.0);
         gameStage.setTitle("Dont Starve Lite");
-        gameStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/dslite/gui/icon.png"))));
+        gameStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/dslite/ui/icon.png"))));
 
         gameStage.setOnHidden(request -> {
             getStage(mainPane).show();

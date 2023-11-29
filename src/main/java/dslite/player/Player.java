@@ -3,6 +3,7 @@ package dslite.player;
 
 import dslite.controllers.GameController;
 import dslite.interfaces.Updatable;
+import dslite.ui.tiles.Tile;
 import dslite.world.World;
 import dslite.world.WorldMap;
 import dslite.world.map.Point;
@@ -22,6 +23,7 @@ public final class Player implements Updatable {
     private GameController controller;
     private WorldMap map;
     private World world;
+    private Tile[][] tileMap;
 
     public Player() {
         health = MAX_HEALTH;
@@ -39,6 +41,18 @@ public final class Player implements Updatable {
 
     @Override
     public void update() {
+    }
+
+    public void move(byte x, byte y) {
+        if (!tileMap[positionX + x][positionY + y].getType().isSolid()) {
+            positionX += x;
+            positionY += y;
+            decreaseActions(1);
+        }
+    }
+
+    private void decreaseActions(int actions) {
+        this.actions -= actions;
     }
 
     public World getWorld() {

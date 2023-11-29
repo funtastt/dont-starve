@@ -1,4 +1,4 @@
-package dslite.gui.menu;
+package dslite.ui.menu;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
