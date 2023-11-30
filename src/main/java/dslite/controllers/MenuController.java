@@ -55,13 +55,13 @@ public final class MenuController {
     private Stage stage;
 
     @FXML
-    private final ObservableList<String> wSizeOptions = FXCollections.observableArrayList(
+    private final ObservableList<String> mapSizeOptions = FXCollections.observableArrayList(
             "128x128", "192x192", "256x256", "384x384", "512x512"
     );
 
     @FXML
-    private final ObservableList<String> bSizeOptions = FXCollections.observableArrayList(
-            "Beginner", "Amateur", "Hardcore"
+    private final ObservableList<String> biomeSizeOptions = FXCollections.observableArrayList(
+            "Small", "Medium", "Large"
     );
 
 
@@ -85,7 +85,7 @@ public final class MenuController {
         gameStage.setScene(new Scene(root));
         gameStage.setWidth(1600.0);
         gameStage.setHeight(900.0);
-        gameStage.setTitle("Dont Starve Lite");
+        gameStage.setTitle("Don't starve 2D");
         gameStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/dslite/ui/icon.png"))));
 
         gameStage.setOnHidden(request -> {
@@ -98,14 +98,14 @@ public final class MenuController {
 
     @FXML
     public void initialize() {
-        sizeX = getResolution(wSizeOptions.get(0), 0);
-        sizeY = getResolution(wSizeOptions.get(0), 1);
-        biomeSize = bSizeOptions.get(0);
+        sizeX = getResolution(mapSizeOptions.get(0), 0);
+        sizeY = getResolution(mapSizeOptions.get(0), 1);
+        biomeSize = biomeSizeOptions.get(0);
 
         ArrowMenu wSizeMenu = new ArrowMenu();
         ArrowMenu bSizeMenu = new ArrowMenu();
-        wSizeMenu.getMenuButton().setOptions(wSizeOptions);
-        bSizeMenu.getMenuButton().setOptions(bSizeOptions);
+        wSizeMenu.getMenuButton().setOptions(mapSizeOptions);
+        bSizeMenu.getMenuButton().setOptions(biomeSizeOptions);
         wSizeMenu.getMenuButton().textProperty().addListener((observableValue, s, newVal) -> {
             sizeX = getResolution(newVal, 0);
             sizeY = getResolution(newVal, 1);

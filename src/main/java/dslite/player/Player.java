@@ -6,8 +6,7 @@ import dslite.interfaces.Updatable;
 import dslite.ui.tiles.Tile;
 import dslite.world.World;
 import dslite.world.WorldMap;
-import dslite.world.map.Point;
-import javafx.scene.image.Image;
+import dslite.world.biomes.Point;
 
 public final class Player implements Updatable {
     public static final double MAX_HEALTH = 100.0;

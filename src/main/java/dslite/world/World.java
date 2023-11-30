@@ -2,6 +2,7 @@ package dslite.world;
 
 import dslite.controllers.GameController;
 import dslite.controllers.MenuController;
+import dslite.enums.GameState;
 import dslite.interfaces.Updatable;
 import dslite.player.Player;
 

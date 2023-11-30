@@ -1,5 +1,6 @@
 package dslite.ui.tiles;
 
+import dslite.enums.TileType;
 import dslite.interfaces.Drawable;
 import javafx.scene.canvas.GraphicsContext;
 

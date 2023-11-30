@@ -1,8 +1,9 @@
-package dslite.ui;
+package dslite.player;
 
 import dslite.interfaces.Updatable;
-import dslite.player.Player;
-import dslite.world.GameState;
+import dslite.ui.tiles.Tile;
+import dslite.enums.TileType;
+import dslite.enums.GameState;
 import dslite.world.World;
 import dslite.world.WorldMap;
 import javafx.scene.canvas.Canvas;
@@ -23,8 +24,10 @@ public final class GameScreen extends Canvas implements Updatable {
     private final GraphicsContext gc = getGraphicsContext2D();
 
     private Player player;
+    private Camera camera;
     private World world;
     private WorldMap map;
+    private Tile[][] tileMap;
 
     private static GameScreen instance = null;
 
@@ -49,10 +52,25 @@ public final class GameScreen extends Canvas implements Updatable {
     }
 
     public void draw() {
-        //Draw the grid if option set
+        //Fill the screen with water
+        gc.setFill(TileType.WATER.getColor());
+        gc.fillRect(0, 0, getWidth(), getHeight());
+
+        int xOffset = camera.getxOffset();
+        int yOffset = camera.getyOffset();
+
+        for (int i = 0; i < ROWS_ON_SCREEN_COUNT; i++) {
+            for (int j = 0; j < COLUMNS_ON_SCREEN_COUNT; j++) {
+                int posX = xOffset + i;
+                int posY = yOffset + j;
+                if (posX > 0 && posX < map.getWidth() && posY > 0 && posY < map.getHeight()) {
+                    tileMap[posX][posY].draw(gc, i, j);
+                }
+            }
+        }
+
         if (DRAW_GRID) drawGrid();
 
-        //Make the world dark if it's nighttime
         if (world.getGameState() == GameState.NIGHT) drawNightOverlay();
     }
 
@@ -81,6 +99,8 @@ public final class GameScreen extends Canvas implements Updatable {
         this.world = world;
         this.map = world.getMap();
         this.player = world.getPlayer();
+        this.tileMap = map.getTilemap();
+        camera = new Camera(map.getWidth(), map.getHeight(), player);
         draw();
         drawPlayer(player);
     }

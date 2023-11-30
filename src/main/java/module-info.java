@@ -5,11 +5,11 @@ module com.example.exam_ {
 
     exports dslite;
     exports dslite.controllers;
-    exports dslite.ui;
     exports dslite.ui.menu;
     exports dslite.world;
     exports dslite.player;
     exports dslite.interfaces;
 
     opens dslite.controllers to javafx.fxml;
+    exports dslite.enums;
 }

@@ -2,7 +2,7 @@ package dslite.controllers;
 
 
 import dslite.player.Player;
-import dslite.ui.GameScreen;
+import dslite.player.GameScreen;
 import dslite.ui.info.MainCharacteristics;
 import dslite.world.World;
 import dslite.world.WorldMap;

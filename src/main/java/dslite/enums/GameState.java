@@ -1,4 +1,4 @@
-package dslite.world;
+package dslite.enums;
 
 public enum GameState {
     DAY,

@@ -1,4 +1,4 @@
-package dslite.world.map;
+package dslite.world.biomes;
 
 public final class Point {
     private final int x;
@@ -15,7 +15,7 @@ public final class Point {
         return Math.abs(xDiff) + Math.abs(yDiff);
     }
 
-    public static int cDist(Point p1, Point p2) {
+    public static int euclideanDist(Point p1, Point p2) {
         int xDiff = p2.x - p1.x;
         int yDiff = p2.y - p1.y;
         return xDiff * xDiff + yDiff * yDiff;
