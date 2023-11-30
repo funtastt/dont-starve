@@ -1,7 +1,7 @@
 package dslite.world;
 
-import dslite.controllers.GameController;
-import dslite.controllers.MenuController;
+import dslite.views.GameView;
+import dslite.views.MenuView;
 import dslite.enums.GameState;
 import dslite.interfaces.Updatable;
 import dslite.player.Player;
@@ -11,7 +11,7 @@ public final class World implements Updatable {
 
     private final Player player;
     private final WorldMap map;
-    private final GameController controller;
+    private final GameView controller;
 
     private int dayCount = 0;
     private GameState gameState;
@@ -21,10 +21,10 @@ public final class World implements Updatable {
     public static final byte ACTIONS_PER_NIGHTTIME = 30;
     public static final byte DAY_LENGTH = ACTIONS_PER_DAYTIME + ACTIONS_PER_NIGHTTIME;
 
-    public World(GameController controller) {
+    public World(GameView controller) {
         this.controller = controller;
         gameState = GameState.DAY;
-        map = new WorldMap(MenuController.getSizeX(),MenuController.getSizeY());
+        map = new WorldMap(MenuView.getSizeX(), MenuView.getSizeY());
         player = new Player(this);
     }
 
@@ -54,7 +54,7 @@ public final class World implements Updatable {
         return gameState;
     }
 
-    public GameController getController() {
+    public GameView getController() {
         return controller;
     }
 

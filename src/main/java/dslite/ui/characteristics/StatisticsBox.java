@@ -1,4 +1,4 @@
-package dslite.ui.info;
+package dslite.ui.characteristics;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,8 +18,8 @@ public class StatisticsBox extends HBox {
     private double maxVal;
 
     private static final Color GREEN = new Color(0.0, 1.0, 0.0, 1.0);
-    private static final double MAXHUE = GREEN.getHue();
-    private static final BackgroundFill BGFILL = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
+    private static final double MAX_HUE = GREEN.getHue();
+    private static final BackgroundFill BG_FILL = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
 
     protected StatisticsBox(String text) {
         super();
@@ -30,12 +30,12 @@ public class StatisticsBox extends HBox {
         label = new Label(text);
         label.setFont(Font.font("Arial", 32.0));
         label.setTextFill(Color.WHITE);
-        label.setBackground(new Background(BGFILL));
+        label.setBackground(new Background(BG_FILL));
         label.setAlignment(Pos.CENTER_LEFT);
 
         value = new Label();
         value.setFont(Font.font("Arial", 32.0));
-        value.setBackground(new Background(BGFILL));
+        value.setBackground(new Background(BG_FILL));
         value.setAlignment(Pos.CENTER_RIGHT);
 
         getChildren().addAll(label, value);
@@ -48,7 +48,7 @@ public class StatisticsBox extends HBox {
 
     protected void setValue(double val) {
         value.setText(String.format(Locale.ROOT, "%.1f", val));
-        value.setTextFill(Color.hsb(Math.max(MAXHUE * val / maxVal, 0), 1.0, 1.0));
+        value.setTextFill(Color.hsb(Math.max(MAX_HUE * val / maxVal, 0), 1.0, 1.0));
     }
 
 }

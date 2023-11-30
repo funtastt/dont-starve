@@ -17,7 +17,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dslite.controllers.MenuController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dslite.views.MenuView">
     <StackPane onMouseDragged="#handleDragEvent" onMousePressed="#handlePressEvent" prefHeight="24.0" prefWidth="625.0">
         <opaqueInsets>
             <Insets/>

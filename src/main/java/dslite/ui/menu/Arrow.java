@@ -3,34 +3,25 @@ package dslite.ui.menu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * GUI class of the arrow symbol of {@link ArrowMenu}.
- *
- * @see ArrowButton
- */
+import java.util.Objects;
+
 public final class Arrow extends ImageView {
 
     private final boolean previous;
     private static final String PATH = "/dslite/ui/play_inactive.png";
-    private static final Image IMG = new Image(Arrow.class.getResource(PATH).toExternalForm());
+    private static final Image ARROW_IMAGE = loadImage(PATH);
+    private static final double FIT_WIDTH = 30;
+    private static final double FIT_HEIGHT = 40;
 
-    /**
-     * Constructs an arrow.
-     * If <code>isPrevious</code> is set to <code>true</code><br/>
-     * the image gets rotated by 180 degrees.
-     */
     public Arrow(boolean isPrevious) {
         super();
-        setFitWidth(30);
-        setFitHeight(40);
-        setImage(IMG);
+        setFitWidth(FIT_WIDTH);
+        setFitHeight(FIT_HEIGHT);
+        setImage(ARROW_IMAGE);
         previous = isPrevious;
         if (isPrevious) { setRotate(180.0); }
     }
 
-    /**
-     * Links the arrow to an {@link ArrowButton}.
-     */
     public void linkToButton(ArrowButton btn) {
         this.setOnMouseClicked(mouseEvent ->
                 btn.setText(isPrevious() ? btn.getPreviousOption() : btn.getNextOption()));
@@ -38,6 +29,10 @@ public final class Arrow extends ImageView {
 
     public boolean isPrevious() {
         return previous;
+    }
+
+    private static Image loadImage(String path) {
+        return new Image(Objects.requireNonNull(Arrow.class.getResource(path)).toExternalForm());
     }
 
 }

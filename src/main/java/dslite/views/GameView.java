@@ -1,9 +1,9 @@
-package dslite.controllers;
+package dslite.views;
 
 
 import dslite.player.Player;
 import dslite.player.Screen;
-import dslite.ui.info.MainCharacteristics;
+import dslite.ui.characteristics.MainCharacteristics;
 import dslite.world.World;
 import dslite.world.map.WorldMap;
 import javafx.event.EventHandler;
@@ -14,7 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public final class GameController {
+public final class GameView {
     @FXML
     private VBox mainPane;
     private static World world;
@@ -56,6 +56,7 @@ public final class GameController {
                 case D -> player.move(1, 0);
             }
 
+            // Update everything after user interaction
             world.update();
             gameScreen.update();
             player.update();

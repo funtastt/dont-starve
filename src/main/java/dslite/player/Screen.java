@@ -12,7 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 
 public final class Screen extends Canvas implements Updatable {
-
     public static final int COLUMNS_ON_SCREEN_COUNT = 25;
     public static final int ROWS_ON_SCREEN_COUNT = 25;
     private static final double GAME_SCREEN_WIDTH = 700.0;

@@ -1,6 +1,7 @@
-package dslite.controllers;
+package dslite.views;
 
 import dslite.GameLauncher;
+import dslite.enums.BiomeSize;
 import dslite.ui.menu.ArrowMenu;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -23,10 +24,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-public final class MenuController {
+public final class MenuView {
 
     @FXML
     private AnchorPane mainPane;
@@ -61,7 +64,9 @@ public final class MenuController {
 
     @FXML
     private final ObservableList<String> biomeSizeOptions = FXCollections.observableArrayList(
-            "Small", "Medium", "Large"
+            Arrays.stream(BiomeSize.values())
+                    .map(BiomeSize::getSize)
+                    .collect(Collectors.toList())
     );
 
 

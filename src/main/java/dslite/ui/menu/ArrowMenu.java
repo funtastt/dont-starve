@@ -5,13 +5,16 @@ import javafx.scene.layout.HBox;
 
 public final class ArrowMenu extends HBox {
     private final ArrowButton btn = new ArrowButton();
+    private static final double MENU_WIDTH = 190.0;
+    private static final double MENU_HEIGHT = 50.0;
+    private static final double SPACING = 5.0;
 
     public ArrowMenu() {
         super();
         setAlignment(Pos.CENTER);
-        setWidth(190.0);
-        setHeight(50.0);
-        setSpacing(5.0);
+        setWidth(MENU_WIDTH);
+        setHeight(MENU_HEIGHT);
+        setSpacing(SPACING);
 
         Arrow prev = new Arrow(true);
         prev.linkToButton(btn);

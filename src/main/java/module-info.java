@@ -4,13 +4,15 @@ module com.example.exam_ {
     requires com.google.gson;
 
     exports dslite;
-    exports dslite.controllers;
+    exports dslite.views;
+    exports dslite.ui.characteristics;
     exports dslite.ui.menu;
+    exports dslite.ui.tiles;
     exports dslite.world;
+    exports dslite.world.map;
     exports dslite.player;
     exports dslite.interfaces;
-
-    opens dslite.controllers to javafx.fxml;
     exports dslite.enums;
-    exports dslite.world.map;
+
+    opens dslite.views to javafx.fxml;
 }

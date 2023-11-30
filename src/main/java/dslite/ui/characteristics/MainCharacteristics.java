@@ -1,6 +1,6 @@
-package dslite.ui.info;
+package dslite.ui.characteristics;
 
-import dslite.controllers.GameController;
+import dslite.views.GameView;
 import dslite.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
@@ -15,10 +15,10 @@ public final class MainCharacteristics extends VBox {
 
     public MainCharacteristics() {
         super(20.0);
-        player = GameController.getPlayer();
+        player = GameView.getPlayer();
 
         setPrefWidth(300.0);
-        setPrefHeight(GameController.getGameScreen().getHeight());
+        setPrefHeight(GameView.getGameScreen().getHeight());
         setMinHeight(200.0);
         setAlignment(Pos.TOP_LEFT);
 

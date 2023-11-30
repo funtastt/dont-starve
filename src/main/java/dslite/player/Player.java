@@ -1,6 +1,6 @@
 package dslite.player;
 
-import dslite.controllers.GameController;
+import dslite.views.GameView;
 import dslite.interfaces.Updatable;
 import dslite.enums.TextureType;
 import dslite.ui.tiles.Tile;
@@ -21,7 +21,7 @@ public final class Player implements Updatable {
     private double sanity;
     private double hunger;
     private byte actions;
-    private GameController controller;
+    private GameView controller;
     private WorldMap map;
     private World world;
     private Tile[][] tileMap;
@@ -49,7 +49,7 @@ public final class Player implements Updatable {
 
     @Override
     public void update() {
-        GameController.getGameScreen().drawPlayer(this);
+        GameView.getGameScreen().drawPlayer(this);
         controller.getCharacteristics().update();
     }
 
@@ -97,7 +97,7 @@ public final class Player implements Updatable {
         return map;
     }
 
-    public GameController getController() {
+    public GameView getController() {
         return controller;
     }
 

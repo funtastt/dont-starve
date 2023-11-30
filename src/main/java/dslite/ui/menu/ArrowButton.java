@@ -7,27 +7,23 @@ import javafx.scene.control.Button;
 public final class ArrowButton extends Button {
 
     private ObservableList<String> options = FXCollections.observableArrayList();
+    private static final double MIN_WIDTH = 150.0;
+    private static final double MIN_HEIGHT = 50.0;
     private int selectedOption;
 
     public ArrowButton() {
         super();
-        setMinWidth(150.0);
-        setMinHeight(50.0);
+        setMinWidth(MIN_WIDTH);
+        setMinHeight(MIN_HEIGHT);
         setFocusTraversable(false);
     }
 
     public String getPreviousOption() {
-        if (selectedOption > 0) {
-            return options.get(--selectedOption);
-        }
-        return options.get(selectedOption);
+        return (selectedOption > 0) ? options.get(--selectedOption) : options.get(selectedOption);
     }
 
     public String getNextOption() {
-        if (selectedOption < options.size() - 1) {
-            return options.get(++selectedOption);
-        }
-        return options.get(selectedOption);
+        return (selectedOption < options.size() - 1) ? options.get(++selectedOption) : options.get(selectedOption);
     }
 
     public void setSelectedOption(int index) {

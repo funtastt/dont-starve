@@ -1,9 +1,8 @@
 package dslite.world.map;
 
 import dslite.GameLauncher;
-import dslite.controllers.GameController;
-import dslite.controllers.MenuController;
-import dslite.enums.TextureType;
+import dslite.views.GameView;
+import dslite.views.MenuView;
 import dslite.ui.tiles.Tile;
 import dslite.enums.TileType;
 import dslite.enums.BiomeType;
@@ -13,7 +12,6 @@ import java.util.*;
 public final class WorldMap {
     private final int width;
     private final int height;
-
     private Point spawnPoint;
 
     private Tile[][] tileMap;
@@ -30,7 +28,7 @@ public final class WorldMap {
         Set<Point> biomePoints = new HashSet<>();
 
         int biomeNum = 0;
-        switch (MenuController.getBiomeSize()) {
+        switch (MenuView.getBiomeSize()) {
             case "Small" -> biomeNum = (int) (width * width * 0.025);
             case "Medium" -> biomeNum = (int) (width * width * 0.01);
             case "Large" -> biomeNum = (int) (width * width * 0.005);
@@ -74,7 +72,7 @@ public final class WorldMap {
     }
 
     public void update() {
-        GameController.getGameScreen().drawPlayer(GameController.getPlayer());
+        GameView.getGameScreen().drawPlayer(GameView.getPlayer());
     }
 
     private void initTilemap(TileType type) {

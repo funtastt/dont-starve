@@ -1,4 +1,4 @@
-package dslite.ui.info;
+package dslite.ui.characteristics;
 
 import javafx.scene.paint.Color;
 
