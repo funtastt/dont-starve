@@ -1,6 +1,5 @@
 package dslite.ui.menu;
 
-import dslite.enums.BiomeSize;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;

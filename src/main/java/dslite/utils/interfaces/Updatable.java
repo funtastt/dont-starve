@@ -1,4 +1,4 @@
-package dslite.interfaces;
+package dslite.utils.interfaces;
 
 public interface Updatable {
 

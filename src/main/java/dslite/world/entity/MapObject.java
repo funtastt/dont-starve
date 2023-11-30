@@ -1,6 +1,6 @@
 package dslite.world.entity;
 
-import dslite.enums.ObjectType;
+import dslite.utils.enums.ObjectType;
 import dslite.player.Player;
 import dslite.ui.tiles.TileWithObject;
 

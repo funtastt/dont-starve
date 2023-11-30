@@ -1,6 +1,6 @@
 package dslite.world.entity;
 
-import dslite.enums.ItemType;
+import dslite.utils.enums.ItemType;
 import dslite.world.entity.mining_res.CutGrass;
 
 public class ItemGenerator {

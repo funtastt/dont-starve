@@ -1,9 +1,9 @@
 package dslite.player;
 
-import dslite.interfaces.Updatable;
+import dslite.utils.interfaces.Updatable;
 import dslite.ui.tiles.Tile;
-import dslite.enums.TileType;
-import dslite.enums.GameState;
+import dslite.utils.enums.TileType;
+import dslite.utils.enums.GameState;
 import dslite.world.World;
 import dslite.world.map.WorldMap;
 import javafx.scene.canvas.Canvas;

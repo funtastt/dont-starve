@@ -1,9 +1,13 @@
 package dslite.inventory;
 
-import dslite.interfaces.Updatable;
+import dslite.utils.enums.ItemType;
+import dslite.utils.interfaces.Updatable;
 import dslite.player.Player;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.world.entity.Item;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 public final class Inventory implements Updatable {
     public static final byte MAX_SIZE = 10;
@@ -36,6 +40,61 @@ public final class Inventory implements Updatable {
         if (slots.length >= 1) {
             selectedSlot = slots[0];
         }
+    }
+
+    public boolean addItem(ItemType itemType, int quantity) {
+        int addedItems = 0;
+        while (addedItems < quantity) {
+            Slot s = availableSlotFor(itemType);
+            if (s == null) {
+                removeItemByType(itemType, addedItems);
+                invDisplay.update();
+                return false;
+            }
+
+            if (s.getStoredItemType() == null) {
+                s.setStoredItem(itemType);
+            }
+            addedItems += s.add(quantity - addedItems);
+        }
+        invDisplay.update();
+        return true;
+    }
+
+    private Slot availableSlotFor(ItemType type) {
+        // Finds among existing
+        Optional<Slot> s = Arrays.stream(slots)
+                .filter(slot -> {
+                    if (slot.getStoredItemType() == type) {
+                        return !slot.isFull();
+                    }
+                    return false;
+                }).findFirst();
+
+        if (s.isPresent()) return s.get();
+
+        // Creating new one
+        s = Arrays.stream(slots)
+                .filter(slot -> slot.getStoredItemType() == null)
+                .findFirst();
+
+        return s.orElse(null);
+    }
+
+    public int removeItemByType(ItemType itemType, int quantity) {
+        int itemsLeft = quantity;
+
+        for (Slot s : slots) {
+            if (s.getStoredItemType() == itemType) {
+                itemsLeft -= s.add(-itemsLeft);
+            }
+            if (itemsLeft <= 0) {
+                invDisplay.update();
+                return quantity;
+            }
+        }
+        invDisplay.update();
+        return quantity - itemsLeft;
     }
 
 

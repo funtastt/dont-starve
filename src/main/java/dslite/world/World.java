@@ -2,8 +2,8 @@ package dslite.world;
 
 import dslite.views.GameView;
 import dslite.views.MenuView;
-import dslite.enums.GameState;
-import dslite.interfaces.Updatable;
+import dslite.utils.enums.GameState;
+import dslite.utils.interfaces.Updatable;
 import dslite.player.Player;
 import dslite.world.map.WorldMap;
 

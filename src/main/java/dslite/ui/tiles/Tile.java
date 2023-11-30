@@ -1,7 +1,7 @@
 package dslite.ui.tiles;
 
-import dslite.enums.TileType;
-import dslite.interfaces.Drawable;
+import dslite.utils.enums.TileType;
+import dslite.utils.interfaces.Drawable;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Tile implements Drawable {

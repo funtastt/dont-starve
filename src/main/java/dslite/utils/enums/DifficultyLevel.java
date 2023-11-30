@@ -1,4 +1,4 @@
-package dslite.enums;
+package dslite.utils.enums;
 
 import java.util.Arrays;
 import java.util.Map;

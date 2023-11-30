@@ -1,14 +1,14 @@
 package dslite.world.map;
 
 import dslite.GameLauncher;
-import dslite.enums.BiomeSize;
-import dslite.enums.DifficultyLevel;
+import dslite.utils.enums.BiomeSize;
+import dslite.utils.enums.DifficultyLevel;
 import dslite.ui.tiles.TileWithObject;
 import dslite.views.GameView;
 import dslite.views.MenuView;
 import dslite.ui.tiles.Tile;
-import dslite.enums.TileType;
-import dslite.enums.BiomeType;
+import dslite.utils.enums.TileType;
+import dslite.utils.enums.BiomeType;
 
 import java.util.*;
 

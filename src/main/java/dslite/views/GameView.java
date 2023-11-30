@@ -54,9 +54,15 @@ public final class GameView {
 
             switch (code) {
                 case W, UP -> player.move(0, -1);
-                case A, LEFT -> player.move(-1,0);
+                case A, LEFT -> player.move(-1, 0);
                 case S, DOWN -> player.move(0, 1);
                 case D, RIGHT -> player.move(1, 0);
+                case SPACE -> player.interact();
+                default -> {
+                    if (code.isDigitKey()) {
+                        player.getInventory().setSelectedSlot(Integer.parseInt(code.getChar()) - 1);
+                    }
+                }
             }
 
             // Update everything after user interaction

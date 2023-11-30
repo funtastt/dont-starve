@@ -11,8 +11,8 @@ module com.example.exam_ {
     exports dslite.world;
     exports dslite.world.map;
     exports dslite.player;
-    exports dslite.interfaces;
-    exports dslite.enums;
+    exports dslite.utils.interfaces;
+    exports dslite.utils.enums;
 
     opens dslite.views to javafx.fxml;
     exports dslite.world.entity.mining_res;

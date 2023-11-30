@@ -2,9 +2,10 @@ package dslite.player;
 
 import dslite.inventory.Inventory;
 import dslite.ui.inventory.InventoryItemRow;
+import dslite.ui.tiles.TileWithObject;
 import dslite.views.GameView;
-import dslite.interfaces.Updatable;
-import dslite.enums.Texture;
+import dslite.utils.interfaces.Updatable;
+import dslite.utils.enums.Texture;
 import dslite.ui.tiles.Tile;
 import dslite.world.World;
 import dslite.world.map.WorldMap;
@@ -92,7 +93,7 @@ public final class Player implements Updatable {
         }
     }
 
-    private void decreaseActions(int actions) {
+    public void decreaseActions(int actions) {
         this.actions -= actions;
     }
 
@@ -143,5 +144,19 @@ public final class Player implements Updatable {
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public Tile[][] getTileMap() {
+        return tileMap;
+    }
+
+    private Tile getTile() {
+        return tileMap[positionX][positionY];
+    }
+
+    public void interact() {
+        if (getTile() instanceof TileWithObject) {
+            ((TileWithObject) getTile()).getObject().interact(this);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package dslite.world.entity;
 
-import dslite.enums.ItemType;
+import dslite.utils.enums.ItemType;
 
 public abstract class Item {
     private final ItemType type;

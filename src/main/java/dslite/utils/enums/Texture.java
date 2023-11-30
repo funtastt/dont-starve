@@ -1,4 +1,4 @@
-package dslite.enums;
+package dslite.utils.enums;
 
 import javafx.scene.image.Image;
 
@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 public enum Texture {
     WILSON(1, "Wilson", "/dslite/textures/characters/wilson.png"),
     GRASS(2, "Grass", "/dslite/textures/mining_res/grass.png"),
-    CUT_GRASS(3, "Cut grass", "/dslite/textures/mining_res/cut_grass.png");
+    CUT_GRASS(3, "Cut grass", "/dslite/textures/mining_res/cut_grass.png"),
+    GRASS_PICKED(4, "Grass picked", "/dslite/textures/mining_res/grass_picked.png");
     private final Image textureImage;
     private final int sprite;
     private final String name;

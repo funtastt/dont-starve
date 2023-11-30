@@ -1,6 +1,6 @@
 package dslite.player;
 
-import dslite.interfaces.Updatable;
+import dslite.utils.interfaces.Updatable;
 
 public final class Camera implements Updatable {
     private final int width;

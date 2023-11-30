@@ -1,7 +1,7 @@
 package dslite.ui.tiles;
 
-import dslite.enums.Texture;
-import dslite.enums.TileType;
+import dslite.utils.enums.Texture;
+import dslite.utils.enums.TileType;
 import dslite.world.entity.ObjectGenerator;
 import dslite.world.entity.MapObject;
 import dslite.world.map.Point;

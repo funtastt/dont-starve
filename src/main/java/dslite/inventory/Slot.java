@@ -1,6 +1,6 @@
 package dslite.inventory;
 
-import dslite.enums.ItemType;
+import dslite.utils.enums.ItemType;
 import dslite.world.entity.Item;
 import dslite.world.entity.ItemGenerator;
 

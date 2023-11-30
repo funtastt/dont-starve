@@ -1,8 +1,8 @@
 package dslite.world.map;
 
-import dslite.enums.BiomeType;
+import dslite.utils.enums.BiomeType;
 import dslite.ui.tiles.Tile;
-import dslite.enums.TileType;
+import dslite.utils.enums.TileType;
 
 import java.util.HashMap;
 

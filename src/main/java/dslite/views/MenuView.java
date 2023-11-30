@@ -1,9 +1,8 @@
 package dslite.views;
 
-import dslite.GameLauncher;
-import dslite.enums.BiomeSize;
-import dslite.enums.DifficultyLevel;
-import dslite.enums.MapSize;
+import dslite.utils.enums.BiomeSize;
+import dslite.utils.enums.DifficultyLevel;
+import dslite.utils.enums.MapSize;
 import dslite.ui.menu.ArrowMenu;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -15,8 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +24,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 import static dslite.world.map.WorldMap.MAX_FREQ;
 
