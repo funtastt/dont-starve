@@ -1,4 +1,4 @@
-package dslite.world.entity.mining_res;
+package dslite.world.entity;
 
 import dslite.enums.ObjectType;
 import dslite.player.Player;

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public final class GameLauncher extends Application {
-    public final static Random RAND = new Random();
+    public final static Random RANDOM = new Random();
 
     @Override
     public void start(Stage stage) throws IOException {

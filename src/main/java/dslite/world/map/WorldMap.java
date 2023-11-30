@@ -9,7 +9,6 @@ import dslite.views.MenuView;
 import dslite.ui.tiles.Tile;
 import dslite.enums.TileType;
 import dslite.enums.BiomeType;
-import dslite.world.entity.mining_res.MapObject;
 
 import java.util.*;
 
@@ -33,22 +32,16 @@ public final class WorldMap {
         List<Biome> biomes = new ArrayList<>();
         Set<Point> biomePoints = new HashSet<>();
 
-        int biomeNum = 0;
+        int biomeNum = (int) (BiomeSize.getFreq(MenuView.getBiomeSize()) * width * height);
 
-        switch (MenuView.getBiomeSize()) {
-            case "Small" -> biomeNum = (int) (width * width * 0.025);
-            case "Medium" -> biomeNum = (int) (width * width * 0.01);
-            case "Large" -> biomeNum = (int) (width * width * 0.005);
-        }
-
-        biomeNum += GameLauncher.RAND.nextInt(100);
+        biomeNum += GameLauncher.RANDOM.nextInt(100);
 
         while (biomePoints.size() < biomeNum) {
-            biomePoints.add(new Point(GameLauncher.RAND.nextInt(width - 1), GameLauncher.RAND.nextInt(height - 1)));
+            biomePoints.add(new Point(GameLauncher.RANDOM.nextInt(width - 1), GameLauncher.RANDOM.nextInt(height - 1)));
         }
 
         for (Point p : biomePoints) {
-            biomes.add(new Biome(BiomeType.VAL[GameLauncher.RAND.nextInt(BiomeType.LEN)], p.getX(), p.getY()));
+            biomes.add(new Biome(BiomeType.VAL[GameLauncher.RANDOM.nextInt(BiomeType.LEN)], p.getX(), p.getY()));
         }
 
         for (int i = 0; i < width - 1; i++) {
@@ -130,14 +123,14 @@ public final class WorldMap {
             Map<Integer, Double> frequencies = b.getBiomeType().getSpawnFrequency();
 
             b.getTiles().replaceAll((point, tile) -> {
-                if (GameLauncher.RAND.nextFloat() > MAX_FREQ) {
+                if (GameLauncher.RANDOM.nextFloat() > MAX_FREQ) {
                     return tile;
                 }
 
                 Optional<Map.Entry<Integer, Double>> newTile = frequencies
                         .entrySet()
                         .stream()
-                        .filter(entry -> GameLauncher.RAND.nextFloat() <= entry.getValue())
+                        .filter(entry -> GameLauncher.RANDOM.nextFloat() <= entry.getValue())
                         .findAny();
 
                 if (newTile.isPresent()) {

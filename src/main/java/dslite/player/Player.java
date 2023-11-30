@@ -1,8 +1,10 @@
 package dslite.player;
 
+import dslite.inventory.Inventory;
+import dslite.ui.inventory.InventoryItemRow;
 import dslite.views.GameView;
 import dslite.interfaces.Updatable;
-import dslite.enums.TextureType;
+import dslite.enums.Texture;
 import dslite.ui.tiles.Tile;
 import dslite.world.World;
 import dslite.world.map.WorldMap;
@@ -10,7 +12,7 @@ import dslite.world.map.Point;
 import javafx.scene.image.Image;
 
 public final class Player implements Updatable {
-    public static final Image PLAYER_IMAGE = TextureType.WILSON.getTextureImage();
+    public static final Image PLAYER_IMAGE = Texture.WILSON.getTextureImage();
     public static final double MAX_HEALTH = 100.0;
     public static final double MAX_SANITY = 100.0;
     public static final double MAX_HUNGER = 100.0;
@@ -25,6 +27,8 @@ public final class Player implements Updatable {
     private WorldMap map;
     private World world;
     private Tile[][] tileMap;
+    private Inventory inventory;
+
 
     public Player() {
         health = MAX_HEALTH;
@@ -39,6 +43,8 @@ public final class Player implements Updatable {
         this.map = world.getMap();
         this.tileMap = map.getTilemap();
         controller = world.getController();
+        controller.setInventory(new InventoryItemRow(this));
+        this.inventory = new Inventory(this);
         setPosition(map.getSpawnPoint());
     }
 
@@ -50,6 +56,7 @@ public final class Player implements Updatable {
     @Override
     public void update() {
         GameView.getGameScreen().drawPlayer(this);
+        inventory.update();
         controller.getCharacteristics().update();
     }
 
@@ -134,4 +141,7 @@ public final class Player implements Updatable {
         return positionY;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

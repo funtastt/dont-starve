@@ -1,6 +1,7 @@
 package dslite.views;
 
 
+import dslite.ui.inventory.InventoryItemRow;
 import dslite.player.Player;
 import dslite.player.Screen;
 import dslite.ui.characteristics.MainCharacteristics;
@@ -24,6 +25,8 @@ public final class GameView {
     private MainCharacteristics characteristics;
     private EventHandler<KeyEvent> keyHandler;
 
+    private InventoryItemRow inventory;
+
 
     @FXML
     public void initialize() {
@@ -40,7 +43,7 @@ public final class GameView {
         hbox.getChildren().addAll(gameScreen, characteristics);
         hbox.setAlignment(Pos.CENTER);
 
-        mainPane.getChildren().addAll(hbox);
+        mainPane.getChildren().addAll(hbox, inventory);
         setKeyListener();
         enableView();
     }
@@ -50,10 +53,10 @@ public final class GameView {
             KeyCode code = keyEvent.getCode();
 
             switch (code) {
-                case W -> player.move(0, -1);
-                case A -> player.move(-1,0);
-                case S -> player.move(0, 1);
-                case D -> player.move(1, 0);
+                case W, UP -> player.move(0, -1);
+                case A, LEFT -> player.move(-1,0);
+                case S, DOWN -> player.move(0, 1);
+                case D, RIGHT -> player.move(1, 0);
             }
 
             // Update everything after user interaction
@@ -100,5 +103,13 @@ public final class GameView {
 
     public EventHandler<KeyEvent> getKeyHandler() {
         return keyHandler;
+    }
+
+    public void setInventory(InventoryItemRow inventory) {
+        this.inventory = inventory;
+    }
+
+    public InventoryItemRow getInventory() {
+        return inventory;
     }
 }
