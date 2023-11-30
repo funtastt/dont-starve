@@ -1,4 +1,4 @@
-package dslite.world.biomes;
+package dslite.world.map;
 
 import dslite.enums.BiomeType;
 import dslite.ui.tiles.Tile;

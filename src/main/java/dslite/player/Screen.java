@@ -5,13 +5,13 @@ import dslite.ui.tiles.Tile;
 import dslite.enums.TileType;
 import dslite.enums.GameState;
 import dslite.world.World;
-import dslite.world.WorldMap;
+import dslite.world.map.WorldMap;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 
-public final class GameScreen extends Canvas implements Updatable {
+public final class Screen extends Canvas implements Updatable {
 
     public static final int COLUMNS_ON_SCREEN_COUNT = 25;
     public static final int ROWS_ON_SCREEN_COUNT = 25;
@@ -29,9 +29,9 @@ public final class GameScreen extends Canvas implements Updatable {
     private WorldMap map;
     private Tile[][] tileMap;
 
-    private static GameScreen instance = null;
+    private static Screen instance = null;
 
-    private GameScreen() {
+    private Screen() {
         super(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT);
         prefWidth(GAME_SCREEN_WIDTH);
         prefHeight(GAME_SCREEN_HEIGHT);
@@ -48,11 +48,11 @@ public final class GameScreen extends Canvas implements Updatable {
 
     @Override
     public void update() {
+        camera.update();
         draw();
     }
 
     public void draw() {
-        //Fill the screen with water
         gc.setFill(TileType.WATER.getColor());
         gc.fillRect(0, 0, getWidth(), getHeight());
 
@@ -75,9 +75,12 @@ public final class GameScreen extends Canvas implements Updatable {
     }
 
     public void drawPlayer(Player player) {
-
+        gc.drawImage(Player.PLAYER_IMAGE, player.getPositionX() - camera.getxOffset(),
+                player.getPositionY() - camera.getyOffset(), 1.0, 1.0);
     }
 
+
+    // Draws lines between cells
     private void drawGrid() {
         for (int i = 0; i < COLUMNS_ON_SCREEN_COUNT; i++) {
             gc.strokeLine(i, 0.0, i, ROWS_ON_SCREEN_COUNT);
@@ -105,8 +108,8 @@ public final class GameScreen extends Canvas implements Updatable {
         drawPlayer(player);
     }
 
-    public static GameScreen getInstance() {
-        return instance == null ? new GameScreen() : instance;
+    public static Screen getInstance() {
+        return instance == null ? new Screen() : instance;
     }
 
 }

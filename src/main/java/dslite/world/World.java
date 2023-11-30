@@ -5,6 +5,7 @@ import dslite.controllers.MenuController;
 import dslite.enums.GameState;
 import dslite.interfaces.Updatable;
 import dslite.player.Player;
+import dslite.world.map.WorldMap;
 
 public final class World implements Updatable {
 

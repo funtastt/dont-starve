@@ -10,8 +10,8 @@ public final class Camera implements Updatable {
     private int yOffset;
     private Player player;
 
-    private static final int COLUMNS = GameScreen.COLUMNS_ON_SCREEN_COUNT;
-    private static final int ROWS = GameScreen.ROWS_ON_SCREEN_COUNT;
+    private static final int COLUMNS = Screen.COLUMNS_ON_SCREEN_COUNT;
+    private static final int ROWS = Screen.ROWS_ON_SCREEN_COUNT;
 
     public Camera(int width, int height) {
         this.width = width;

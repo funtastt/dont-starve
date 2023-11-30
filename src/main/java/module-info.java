@@ -12,4 +12,5 @@ module com.example.exam_ {
 
     opens dslite.controllers to javafx.fxml;
     exports dslite.enums;
+    exports dslite.world.map;
 }

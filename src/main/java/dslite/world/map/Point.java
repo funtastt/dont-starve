@@ -1,4 +1,4 @@
-package dslite.world.biomes;
+package dslite.world.map;
 
 public final class Point {
     private final int x;

@@ -18,7 +18,7 @@ public final class MainCharacteristics extends VBox {
         player = GameController.getPlayer();
 
         setPrefWidth(300.0);
-        setPrefHeight(GameController.getGrid().getHeight());
+        setPrefHeight(GameController.getGameScreen().getHeight());
         setMinHeight(200.0);
         setAlignment(Pos.TOP_LEFT);
 

@@ -1,14 +1,16 @@
 package dslite.player;
 
-
 import dslite.controllers.GameController;
 import dslite.interfaces.Updatable;
+import dslite.enums.TextureType;
 import dslite.ui.tiles.Tile;
 import dslite.world.World;
-import dslite.world.WorldMap;
-import dslite.world.biomes.Point;
+import dslite.world.map.WorldMap;
+import dslite.world.map.Point;
+import javafx.scene.image.Image;
 
 public final class Player implements Updatable {
+    public static final Image PLAYER_IMAGE = TextureType.WILSON.getTextureImage();
     public static final double MAX_HEALTH = 100.0;
     public static final double MAX_SANITY = 100.0;
     public static final double MAX_HUNGER = 100.0;
@@ -35,18 +37,51 @@ public final class Player implements Updatable {
         this();
         this.world = world;
         this.map = world.getMap();
+        this.tileMap = map.getTilemap();
         controller = world.getController();
+        setPosition(map.getSpawnPoint());
+    }
+
+    private void setPosition(Point point) {
+        this.positionX = point.getX();
+        this.positionY = point.getY();
     }
 
     @Override
     public void update() {
+        GameController.getGameScreen().drawPlayer(this);
+        controller.getCharacteristics().update();
     }
 
-    public void move(byte x, byte y) {
+    public void move(int x, int y) {
         if (!tileMap[positionX + x][positionY + y].getType().isSolid()) {
             positionX += x;
             positionY += y;
             decreaseActions(1);
+        }
+    }
+
+    public void addHealth(double val) {
+        if (val < 0) {
+            health = Math.max(health + val, 0.0);
+        } else {
+            health = Math.min(health + val, MAX_HEALTH);
+        }
+    }
+
+    public void addSanity(double val) {
+        if (val < 0) {
+            sanity = Math.max(sanity + val, 0.0);
+        } else {
+            sanity = Math.min(sanity + val, MAX_SANITY);
+        }
+    }
+
+    public void addHunger(double val) {
+        if (val < 0) {
+            hunger = Math.max(hunger + val, 0.0);
+        } else {
+            hunger = Math.min(hunger + val, MAX_HUNGER);
         }
     }
 

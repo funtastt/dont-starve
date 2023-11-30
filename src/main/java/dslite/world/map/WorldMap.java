@@ -1,12 +1,12 @@
-package dslite.world;
+package dslite.world.map;
 
 import dslite.GameLauncher;
+import dslite.controllers.GameController;
 import dslite.controllers.MenuController;
+import dslite.enums.TextureType;
 import dslite.ui.tiles.Tile;
 import dslite.enums.TileType;
-import dslite.world.biomes.Biome;
 import dslite.enums.BiomeType;
-import dslite.world.biomes.Point;
 
 import java.util.*;
 
@@ -25,7 +25,6 @@ public final class WorldMap {
         generateMap();
     }
 
-    // TODO:
     public void generateMap() {
         List<Biome> biomes = new ArrayList<>();
         Set<Point> biomePoints = new HashSet<>();
@@ -64,7 +63,6 @@ public final class WorldMap {
             }
         }
 
-        //TODO: check
         initTilemap(TileType.WATER);
         chunkBorders(biomes);
         makeTilemap(biomes);
@@ -73,6 +71,10 @@ public final class WorldMap {
         biomePoints = null;
         biomes = null;
         System.gc();
+    }
+
+    public void update() {
+        GameController.getGameScreen().drawPlayer(GameController.getPlayer());
     }
 
     private void initTilemap(TileType type) {

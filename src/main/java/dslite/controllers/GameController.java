@@ -2,10 +2,10 @@ package dslite.controllers;
 
 
 import dslite.player.Player;
-import dslite.player.GameScreen;
+import dslite.player.Screen;
 import dslite.ui.info.MainCharacteristics;
 import dslite.world.World;
-import dslite.world.WorldMap;
+import dslite.world.map.WorldMap;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -15,13 +15,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public final class GameController {
-
     @FXML
     private VBox mainPane;
     private static World world;
     private static WorldMap map;
     private static Player player;
-    private static GameScreen grid;
+    private static Screen gameScreen;
     private MainCharacteristics characteristics;
     private EventHandler<KeyEvent> keyHandler;
 
@@ -32,13 +31,13 @@ public final class GameController {
         map = world.getMap();
         player = world.getPlayer();
 
-        grid = GameScreen.getInstance();
-        grid.setWorld(world);
+        gameScreen = Screen.getInstance();
+        gameScreen.setWorld(world);
 
         characteristics = new MainCharacteristics();
 
         HBox hbox = new HBox(25.0);
-        hbox.getChildren().addAll(grid, characteristics);
+        hbox.getChildren().addAll(gameScreen, characteristics);
         hbox.setAlignment(Pos.CENTER);
 
         mainPane.getChildren().addAll(hbox);
@@ -51,36 +50,31 @@ public final class GameController {
             KeyCode code = keyEvent.getCode();
 
             switch (code) {
-                case W: {                                           //Move up
-                    player.move((byte) 0, (byte) -1);
-                    break;
-                }
-                case A: {                                           //Move left
-                    player.move((byte) -1, (byte) 0);
-                    break;
-                }
-                case S: {                                           //Move down
-                    player.move((byte) 0, (byte) 1);
-                    break;
-                }
-                case D: {                                           //Move right
-                    player.move((byte) 1, (byte) 0);
-                    break;
-                }
+                case W -> player.move(0, -1);
+                case A -> player.move(-1,0);
+                case S -> player.move(0, 1);
+                case D -> player.move(1, 0);
             }
 
             world.update();
-            grid.update();
+            gameScreen.update();
             player.update();
+            map.update();
         };
         mainPane.setOnKeyPressed(keyHandler);
     }
 
     private void enableView() {
-        grid.setDisable(false);
-        grid.setFocusTraversable(true);
+        gameScreen.setDisable(false);
+        gameScreen.setFocusTraversable(true);
         characteristics.setDisable(false);
         mainPane.setOnKeyPressed(keyHandler);
+    }
+
+    private void disableView() {
+        gameScreen.setDisable(true);
+        characteristics.setDisable(true);
+        mainPane.getScene().removeEventHandler(KeyEvent.ANY, keyHandler);
     }
 
     public static World getWorld() {
@@ -95,8 +89,8 @@ public final class GameController {
         return player;
     }
 
-    public static GameScreen getGrid() {
-        return grid;
+    public static Screen getGameScreen() {
+        return gameScreen;
     }
 
     public MainCharacteristics getCharacteristics() {
