@@ -1,11 +1,15 @@
 package dslite.world.map;
 
 import dslite.GameLauncher;
+import dslite.enums.BiomeSize;
+import dslite.enums.DifficultyLevel;
+import dslite.ui.tiles.TileWithObject;
 import dslite.views.GameView;
 import dslite.views.MenuView;
 import dslite.ui.tiles.Tile;
 import dslite.enums.TileType;
 import dslite.enums.BiomeType;
+import dslite.world.entity.mining_res.MapObject;
 
 import java.util.*;
 
@@ -15,6 +19,8 @@ public final class WorldMap {
     private Point spawnPoint;
 
     private Tile[][] tileMap;
+
+    public static double MAX_FREQ = DifficultyLevel.AMATEUR.getFreq();
 
     public WorldMap(int width, int height) {
         this.width = width;
@@ -28,6 +34,7 @@ public final class WorldMap {
         Set<Point> biomePoints = new HashSet<>();
 
         int biomeNum = 0;
+
         switch (MenuView.getBiomeSize()) {
             case "Small" -> biomeNum = (int) (width * width * 0.025);
             case "Medium" -> biomeNum = (int) (width * width * 0.01);
@@ -63,6 +70,7 @@ public final class WorldMap {
 
         initTilemap(TileType.WATER);
         chunkBorders(biomes);
+        fillWithResources(biomes);
         makeTilemap(biomes);
         createSpawnPoint(biomes);
 
@@ -109,7 +117,7 @@ public final class WorldMap {
                     b.getTiles()
                             .entrySet()
                             .stream()
-                            .filter(tile -> !tile.getValue().getType().isSolid()).findFirst();
+                            .filter(tile -> tile.getValue().getType().isPassable()).findFirst();
             if (entry.isPresent()) {
                 setSpawnPoint(entry.get().getKey());
                 return;
@@ -117,6 +125,30 @@ public final class WorldMap {
         }
     }
 
+    private void fillWithResources(List<Biome> biomes) {
+        for (Biome b : biomes) {
+            Map<Integer, Double> frequencies = b.getBiomeType().getSpawnFrequency();
+
+            b.getTiles().replaceAll((point, tile) -> {
+                if (GameLauncher.RAND.nextFloat() > MAX_FREQ) {
+                    return tile;
+                }
+
+                Optional<Map.Entry<Integer, Double>> newTile = frequencies
+                        .entrySet()
+                        .stream()
+                        .filter(entry -> GameLauncher.RAND.nextFloat() <= entry.getValue())
+                        .findAny();
+
+                if (newTile.isPresent()) {
+                    int objIndex = newTile.get().getKey();
+                    return new TileWithObject(b.getTileType(), point, objIndex);
+                }
+
+                return tile;
+            });
+        }
+    }
 
 
     public void setTileAtPosition(Point p, TileType type) {

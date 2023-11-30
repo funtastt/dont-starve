@@ -24,7 +24,7 @@ public final class Arrow extends ImageView {
 
     public void linkToButton(ArrowButton btn) {
         this.setOnMouseClicked(mouseEvent ->
-                btn.setText(isPrevious() ? btn.getPreviousOption() : btn.getNextOption()));
+                btn.setText((isPrevious() ? btn.getPreviousOption() : btn.getNextOption()).toString()));
     }
 
     public boolean isPrevious() {

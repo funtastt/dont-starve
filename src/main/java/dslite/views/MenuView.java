@@ -2,6 +2,8 @@ package dslite.views;
 
 import dslite.GameLauncher;
 import dslite.enums.BiomeSize;
+import dslite.enums.DifficultyLevel;
+import dslite.enums.MapSize;
 import dslite.ui.menu.ArrowMenu;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -24,10 +26,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
+import static dslite.world.map.WorldMap.MAX_FREQ;
 
 public final class MenuView {
 
@@ -38,13 +40,13 @@ public final class MenuView {
     private Rectangle minBtn;
 
     @FXML
-    private TextField seedField;
-
-    @FXML
     private HBox wSizeBox;
 
     @FXML
     private HBox bSizeBox;
+
+    @FXML
+    private HBox difficultyBox;
 
     @FXML
     private Button generateBtn;
@@ -58,31 +60,22 @@ public final class MenuView {
     private Stage stage;
 
     @FXML
-    private final ObservableList<String> mapSizeOptions = FXCollections.observableArrayList(
-            "128x128", "192x192", "256x256", "384x384", "512x512"
+    private final ObservableList<MapSize> mapSizeOptions = FXCollections.observableArrayList(
+            MapSize.values()
     );
 
     @FXML
-    private final ObservableList<String> biomeSizeOptions = FXCollections.observableArrayList(
-            Arrays.stream(BiomeSize.values())
-                    .map(BiomeSize::getSize)
-                    .collect(Collectors.toList())
+    private final ObservableList<BiomeSize> biomeSizeOptions = FXCollections.observableArrayList(
+            BiomeSize.values()
     );
 
-
     @FXML
-    private void seedCheck(String seed) {
-        if (Pattern.matches("[0-9]{1,10}", seed)) {
-            GameLauncher.RAND.setSeed(Long.parseLong(seed));
-        } else if (!seed.isEmpty()) {
-            GameLauncher.RAND.setSeed(seed.hashCode());
-        }
-    }
+    private final ObservableList<DifficultyLevel> difficultyLevelsOptions = FXCollections.observableArrayList(
+            DifficultyLevel.values()
+    );
 
     @FXML
     private void startGame(ActionEvent event) throws IOException {
-        seedCheck(seedField.getText());
-
         Stage gameStage = new Stage(StageStyle.DECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dslite/gamescreen.fxml"));
         Parent root = fxmlLoader.load();
@@ -103,23 +96,28 @@ public final class MenuView {
 
     @FXML
     public void initialize() {
-        sizeX = getResolution(mapSizeOptions.get(0), 0);
-        sizeY = getResolution(mapSizeOptions.get(0), 1);
-        biomeSize = biomeSizeOptions.get(0);
+        sizeX = mapSizeOptions.get(0).getWidth();
+        sizeY = mapSizeOptions.get(0).getHeight();
+        biomeSize = biomeSizeOptions.get(0).toString();
+        MAX_FREQ = difficultyLevelsOptions.get(0).getFreq();
 
         ArrowMenu wSizeMenu = new ArrowMenu();
         ArrowMenu bSizeMenu = new ArrowMenu();
+        ArrowMenu difficultyMenu = new ArrowMenu();
         wSizeMenu.getMenuButton().setOptions(mapSizeOptions);
         bSizeMenu.getMenuButton().setOptions(biomeSizeOptions);
+        difficultyMenu.getMenuButton().setOptions(difficultyLevelsOptions);
+
         wSizeMenu.getMenuButton().textProperty().addListener((observableValue, s, newVal) -> {
-            sizeX = getResolution(newVal, 0);
-            sizeY = getResolution(newVal, 1);
+            sizeX = MapSize.getColorByName(newVal).getWidth();
+            sizeY = MapSize.getColorByName(newVal).getHeight();
         });
-        bSizeMenu.getMenuButton().textProperty().addListener((observableValue, s, newVal) -> this.biomeSize = newVal);
+        bSizeMenu.getMenuButton().textProperty().addListener((observableValue, s, newVal) -> biomeSize = newVal);
+        difficultyMenu.getMenuButton().textProperty().addListener((observableValue, s, newVal) -> MAX_FREQ = DifficultyLevel.getFrequencyByName(newVal));
+
         wSizeBox.getChildren().add(wSizeMenu);
         bSizeBox.getChildren().add(bSizeMenu);
-        seedField.setTooltip(new Tooltip("World seed"));
-        generateBtn.setTooltip(new Tooltip("Generate map"));
+        difficultyBox.getChildren().add(difficultyMenu);
     }
 
     @FXML

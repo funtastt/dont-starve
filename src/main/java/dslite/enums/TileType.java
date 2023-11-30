@@ -3,24 +3,24 @@ package dslite.enums;
 import javafx.scene.paint.Color;
 
 public enum TileType {
-    WATER(Color.AQUA, true),
-    GRASS(Color.YELLOWGREEN, false),
-    FOREST(Color.FORESTGREEN, false),
-    ROCKY(Color.GAINSBORO, false),
-    MARSH(Color.THISTLE, false),
-    SAVANNA(Color.GOLD, false),
-    SAND(Color.MOCCASIN, false);
+    WATER(Color.AQUA, false),
+    GRASS(Color.YELLOWGREEN, true),
+    FOREST(Color.FORESTGREEN, true),
+    ROCKY(Color.GAINSBORO, true),
+    MARSH(Color.THISTLE, true),
+    SAVANNA(Color.GOLD, true),
+    SAND(Color.MOCCASIN, true);
 
     private final Color color;
-    private final boolean isSolid;
+    private final boolean isPassable;
 
-    TileType(Color color, boolean isSolid) {
+    TileType(Color color, boolean isPassable) {
         this.color = color;
-        this.isSolid = isSolid;
+        this.isPassable = isPassable;
     }
 
-    public boolean isSolid() {
-        return isSolid;
+    public boolean isPassable() {
+        return isPassable;
     }
 
     public Color getColor() {

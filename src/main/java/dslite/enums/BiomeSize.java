@@ -14,4 +14,9 @@ public enum BiomeSize {
     public String getSize() {
         return size;
     }
+
+    @Override
+    public String toString() {
+        return size;
+    }
 }

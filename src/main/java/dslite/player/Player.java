@@ -54,7 +54,7 @@ public final class Player implements Updatable {
     }
 
     public void move(int x, int y) {
-        if (!tileMap[positionX + x][positionY + y].getType().isSolid()) {
+        if (tileMap[positionX + x][positionY + y].getType().isPassable()) {
             positionX += x;
             positionY += y;
             decreaseActions(1);
