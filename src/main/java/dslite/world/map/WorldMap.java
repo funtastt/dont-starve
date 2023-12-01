@@ -6,6 +6,7 @@ import dslite.ui.tiles.TileWithObject;
 import dslite.ui.views.GameView;
 import dslite.ui.views.MenuView;
 import dslite.ui.tiles.Tile;
+import dslite.utils.interfaces.Updatable;
 import dslite.world.entity.MapObject;
 
 import java.util.*;
@@ -73,6 +74,11 @@ public final class WorldMap {
     }
 
     public void update() {
+        for (MapObject obj : updatableObjects) {
+            if (obj instanceof Updatable) {
+                ((Updatable) obj).update();
+            }
+        }
         GameView.getGameScreen().drawPlayer(GameView.getPlayer());
     }
 

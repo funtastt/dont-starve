@@ -74,6 +74,11 @@ public final class GameView {
                 case F12 -> MenuView.setGameStageFullScreen();
                 case SPACE -> player.interact();
                 case F -> player.place();
+                case ESCAPE -> {
+                    if (craftingView.isVisible()) {
+                        changeCraftViewVisibility();
+                    }
+                }
                 default -> {
                     if (code.isDigitKey()) {
                         player.getInventory().setSelectedSlot(Integer.parseInt(code.getChar()) - 1);

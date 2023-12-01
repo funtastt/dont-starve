@@ -33,6 +33,8 @@ public final class Player implements Updatable {
     private Tile[][] tileMap;
     private Inventory inventory;
 
+    private boolean hasCampFireNearby;
+
 
     public Player() {
         this.health = MAX_HEALTH;
@@ -61,6 +63,7 @@ public final class Player implements Updatable {
     public void update() {
         // Update everything
         GameView.getGameScreen().drawPlayer(this);
+        hasCampFireNearby = false;
         inventory.update();
         controller.getCharacteristics().update();
     }
@@ -207,4 +210,11 @@ public final class Player implements Updatable {
         getInventory().removeSlot(getInventory().getSelectedSlot());
     }
 
+    public boolean hasCampFireNearby() {
+        return hasCampFireNearby;
+    }
+
+    public void setHasCampFireNearby(boolean hasCampFireNearby) {
+        this.hasCampFireNearby = hasCampFireNearby;
+    }
 }

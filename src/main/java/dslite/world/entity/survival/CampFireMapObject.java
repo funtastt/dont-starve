@@ -65,12 +65,11 @@ public final class CampFireMapObject extends MapObject implements Drawable, Upda
             //Draws itself
             draw(GameView.getGameScreen().getGraphicsContext2D(), position.getX(), position.getY());
 
-            //Every campfire checks if the player is inside their range
-//            if (!player.hasCampFireNearby()) {
-//                if (Point.mDist(position, player.getPosX(), player.getPosY()) <= LIGHT_DIST) {
-//                    player.setHasCampFireNearby(true);
-//                }
-//            }
+            if (!player.hasCampFireNearby()) {
+                if (Point.manhattanDist(position, new Point(player.getPositionX(), player.getPositionY())) <= LIGHT_DIST) {
+                    player.setHasCampFireNearby(true);
+                }
+            }
         }
     }
 
