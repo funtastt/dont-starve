@@ -24,6 +24,8 @@ public final class Camera implements Updatable {
 
     @Override
     public void update() {
+        // Thanks to this logic, the player is always in the middle of screen
+
         int x = player.getPositionX();
         int y = player.getPositionY();
 

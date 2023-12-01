@@ -2,7 +2,6 @@ package dslite.inventory;
 
 import dslite.utils.enums.ItemType;
 import dslite.world.entity.Item;
-import dslite.world.entity.ItemGenerator;
 
 public final class Slot {
     private Item storedItem;
@@ -16,11 +15,11 @@ public final class Slot {
     }
 
     void init() {
-        stackSize = Inventory.STACK_SIZE;
-        storedItem = null;
-        storedItemType = null;
-        full = false;
-        itemCount = 0;
+        this.stackSize = Inventory.MAX_STACK_SIZE;
+        this.storedItem = null;
+        this.storedItemType = null;
+        this.full = false;
+        this.itemCount = 0;
     }
 
     public int add(int count) {
@@ -48,7 +47,7 @@ public final class Slot {
     void setStoredItem(ItemType itemType) {
         init();
         storedItemType = itemType;
-        storedItem = ItemGenerator.getItem(itemType);
+        storedItem = ItemType.getItemBySprite(itemType.getMiningResItemSprite());
         if (!itemType.isStackable()) {
             stackSize = 1;
         }

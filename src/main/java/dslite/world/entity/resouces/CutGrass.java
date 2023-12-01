@@ -1,4 +1,4 @@
-package dslite.world.entity.mining_res;
+package dslite.world.entity.resouces;
 
 import dslite.utils.enums.ItemType;
 import dslite.world.entity.Item;

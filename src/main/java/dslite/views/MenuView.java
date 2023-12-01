@@ -44,9 +44,6 @@ public final class MenuView {
     @FXML
     private HBox difficultyBox;
 
-    @FXML
-    private Button generateBtn;
-
     private static String biomeSize;
     private static int sizeX;
     private static int sizeY;
@@ -158,9 +155,4 @@ public final class MenuView {
     public static String getBiomeSize() {
         return biomeSize;
     }
-
-    private static Integer getResolution(String res, int index) {
-        return Integer.parseInt(res.split("x")[index]);
-    }
-
 }

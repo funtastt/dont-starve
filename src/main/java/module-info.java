@@ -15,6 +15,9 @@ module com.example.exam_ {
     exports dslite.utils.enums;
 
     opens dslite.views to javafx.fxml;
-    exports dslite.world.entity.mining_res;
+    exports dslite.world.entity.mining;
     exports dslite.world.entity;
+    exports dslite.world.entity.resouces;
+    exports dslite.world.entity.picked;
+    exports dslite.world.entity.generator;
 }

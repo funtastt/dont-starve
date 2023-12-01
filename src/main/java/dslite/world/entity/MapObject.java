@@ -24,7 +24,7 @@ public abstract class MapObject {
 
 
     protected MapObject(int index) {
-        this(ObjectType.getByIndex(index));
+        this(ObjectType.getBySprite(index));
     }
 
     public abstract void interact(Player player);

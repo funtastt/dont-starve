@@ -32,10 +32,10 @@ public final class Player implements Updatable {
 
 
     public Player() {
-        health = MAX_HEALTH;
-        sanity = MAX_SANITY;
-        hunger = MAX_HUNGER;
-        actions = World.ACTIONS_PER_DAYTIME;
+        this.health = MAX_HEALTH;
+        this.sanity = MAX_SANITY;
+        this.hunger = MAX_HUNGER;
+        this.actions = World.ACTIONS_PER_DAYTIME;
     }
 
     public Player(World world) {
@@ -43,8 +43,8 @@ public final class Player implements Updatable {
         this.world = world;
         this.map = world.getMap();
         this.tileMap = map.getTilemap();
-        controller = world.getController();
-        controller.setInventory(new InventoryItemRow(this));
+        this.controller = world.getController();
+        this.controller.setInventory(new InventoryItemRow(this));
         this.inventory = new Inventory(this);
         setPosition(map.getSpawnPoint());
     }
@@ -56,6 +56,7 @@ public final class Player implements Updatable {
 
     @Override
     public void update() {
+        // Update everything
         GameView.getGameScreen().drawPlayer(this);
         inventory.update();
         controller.getCharacteristics().update();

@@ -1,8 +1,9 @@
 package dslite.ui.tiles;
 
+import dslite.utils.enums.ObjectType;
 import dslite.utils.enums.Texture;
 import dslite.utils.enums.TileType;
-import dslite.world.entity.ObjectGenerator;
+import dslite.world.entity.generator.MapObjectGenerator;
 import dslite.world.entity.MapObject;
 import dslite.world.map.Point;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,10 +12,10 @@ public final class TileWithObject extends Tile {
     private MapObject object;
     private final Point objPosition;
 
-    public TileWithObject(TileType type, Point pos, int objIndex) {
+    public TileWithObject(TileType type, Point pos, int objectSprite) {
         super(type);
         this.objPosition = pos;
-        object = ObjectGenerator.getObject(objIndex);
+        object = MapObjectGenerator.getObject(ObjectType.getBySprite(objectSprite));
 
         assert object != null;
         object.setTile(this);

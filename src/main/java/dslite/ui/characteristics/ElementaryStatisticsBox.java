@@ -4,6 +4,8 @@ import javafx.scene.paint.Color;
 
 import java.util.Locale;
 
+
+// TODO:
 public final class ElementaryStatisticsBox extends StatisticsBox {
     ElementaryStatisticsBox(String text) {
         super(text);

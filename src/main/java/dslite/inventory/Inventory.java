@@ -6,12 +6,9 @@ import dslite.player.Player;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.world.entity.Item;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 public final class Inventory implements Updatable {
-    public static final byte MAX_SIZE = 10;
-    public static final byte STACK_SIZE = 64;
+    public static final byte MAX_SLOT_SIZE = 10;
+    public static final byte MAX_STACK_SIZE = 64;
     private Slot[] slots;
     private Slot selectedSlot;
     private final InventoryItemRow invDisplay;
@@ -33,8 +30,8 @@ public final class Inventory implements Updatable {
     }
 
     private void initSlots() {
-        slots = new Slot[MAX_SIZE];
-        for (int i = 0; i < MAX_SIZE; i++) {
+        slots = new Slot[MAX_SLOT_SIZE];
+        for (int i = 0; i < MAX_SLOT_SIZE; i++) {
             slots[i] = new Slot();
         }
         if (slots.length >= 1) {
@@ -42,7 +39,7 @@ public final class Inventory implements Updatable {
         }
     }
 
-    public boolean addItem(ItemType itemType, int quantity) {
+    public boolean addItemAndCheck(ItemType itemType, int quantity) {
         int addedItems = 0;
         while (addedItems < quantity) {
             Slot s = availableSlotFor(itemType);
@@ -62,23 +59,11 @@ public final class Inventory implements Updatable {
     }
 
     private Slot availableSlotFor(ItemType type) {
-        // Finds among existing
-        Optional<Slot> s = Arrays.stream(slots)
-                .filter(slot -> {
-                    if (slot.getStoredItemType() == type) {
-                        return !slot.isFull();
-                    }
-                    return false;
-                }).findFirst();
-
-        if (s.isPresent()) return s.get();
-
-        // Creating new one
-        s = Arrays.stream(slots)
-                .filter(slot -> slot.getStoredItemType() == null)
-                .findFirst();
-
-        return s.orElse(null);
+        for (Slot s : slots) {
+            if (s.getStoredItemType() == type & !s.isFull()) return s;
+            if (s.getStoredItemType() == null) return s;
+        }
+        return null;
     }
 
     public int removeItemByType(ItemType itemType, int quantity) {
@@ -104,7 +89,7 @@ public final class Inventory implements Updatable {
 
     public void setSelectedSlot(int index) {
         if (index < 0) return;
-        this.selectedSlot = slots[Math.min(MAX_SIZE - 1, index)];
+        this.selectedSlot = slots[Math.min(MAX_SLOT_SIZE - 1, index)];
         invDisplay.update();
     }
 

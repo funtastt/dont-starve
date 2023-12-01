@@ -4,17 +4,23 @@ import java.util.Map;
 
 public enum BiomeType {
     FOREST(TileType.FOREST, Map.of(
-            2, 1.0)),
+            Texture.GRASS.getSprite(), 0.5,
+            Texture.SAPLING.getSprite(), 0.5)),
     GRASSLANDS(TileType.GRASS, Map.of(
-            2, 1.0)),
+            Texture.GRASS.getSprite(), 0.5,
+            Texture.SAPLING.getSprite(), 0.5)),
     MARSH(TileType.MARSH, Map.of(
-            2, 1.0)),
+            Texture.GRASS.getSprite(), 0.5,
+            Texture.SAPLING.getSprite(), 0.5)),
     SAVANNA(TileType.SAVANNA, Map.of(
-            2, 1.0)),
+            Texture.GRASS.getSprite(), 0.5,
+            Texture.SAPLING.getSprite(), 0.5)),
     DESERT(TileType.SAND, Map.of(
-            2, 1.0)),
-    ROCKYLAND(TileType.ROCKY, Map.of(
-            2, 1.0));
+            Texture.GRASS.getSprite(), 0.5,
+            Texture.SAPLING.getSprite(), 0.5)),
+    ROCKY_LAND(TileType.ROCKY, Map.of(
+            Texture.GRASS.getSprite(), 0.5,
+            Texture.SAPLING.getSprite(), 0.5));
 
     private final TileType type;
     private final Map<Integer, Double> spawnFrequency;

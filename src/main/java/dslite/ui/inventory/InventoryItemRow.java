@@ -9,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public final class InventoryItemRow extends StackPane {
-
     private InventoryItemBox[] items;
     private final Player player;
     private final HBox hbox;
@@ -31,7 +30,7 @@ public final class InventoryItemRow extends StackPane {
     public void update() {
         Inventory inv = player.getInventory();
 
-        for (int i = 0; i < Inventory.MAX_SIZE; i++) {
+        for (int i = 0; i < Inventory.MAX_SLOT_SIZE; i++) {
             Slot currentSlot = inv.getSlots()[i];
 
             items[i].setItem(currentSlot);
@@ -45,8 +44,8 @@ public final class InventoryItemRow extends StackPane {
     }
 
     private void initSlots() {
-        items = new InventoryItemBox[Inventory.MAX_SIZE];
-        for (int i = 0; i < Inventory.MAX_SIZE; i++) {
+        items = new InventoryItemBox[Inventory.MAX_SLOT_SIZE];
+        for (int i = 0; i < Inventory.MAX_SLOT_SIZE; i++) {
             hbox.getChildren().add(items[i] = new InventoryItemBox());
         }
     }
