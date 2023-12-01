@@ -47,6 +47,12 @@ public enum ItemType {
             Texture.BUSH.getSprite(),
             true
     ),
+    CARROT(
+            Texture.CARROT.getSprite(),
+            Texture.CARROT.getName(),
+            Texture.CARROT.getSprite(),
+            true
+    ),
 
     LOG(
             Texture.LOG.getSprite(),
@@ -88,6 +94,13 @@ public enum ItemType {
             Texture.BERRIES_COOKED.getSprite(),
             Texture.BERRIES_COOKED.getName(),
             Texture.BERRIES.getSprite(),
+            true
+    ),
+
+    CARROT_COOKED(
+            Texture.CARROT_COOKED.getSprite(),
+            Texture.CARROT_COOKED.getName(),
+            Texture.CARROT.getSprite(),
             true
     );
 

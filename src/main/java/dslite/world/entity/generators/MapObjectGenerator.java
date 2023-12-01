@@ -34,6 +34,11 @@ public final class MapObjectGenerator {
             case LOG -> new LogDropped();
             case BERRIES -> new BerriesDropped();
             case ROCK -> new RockDropped();
+            case FLINT -> new FlintDropped();
+            case CARROT -> new CarrotDropped();
+            case CARROT_COOKED -> new CookedCarrotDropped();
+            case BERRIES_COOKED -> new CookedBerriesDropped();
+            case LUMPY_EVERGREEN -> new LumpyEvergreen();
         };
     }
 }

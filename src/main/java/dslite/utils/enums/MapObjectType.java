@@ -30,7 +30,12 @@ public enum MapObjectType {
     PETAL(Texture.PETALS.getSprite()),
     LOG(Texture.LOG.getSprite()),
     BERRIES(Texture.BERRIES.getSprite()),
-    ROCK(Texture.ROCK.getSprite());
+    ROCK(Texture.ROCK.getSprite()),
+    FLINT(Texture.FLINT.getSprite()),
+    CARROT(Texture.CARROT.getSprite()),
+    CARROT_COOKED(Texture.CARROT_COOKED.getSprite()),
+    BERRIES_COOKED(Texture.BERRIES_COOKED.getSprite()),
+    LUMPY_EVERGREEN(Texture.LUMPY_EVERGREEN.getSprite());
     private final int sprite;
     private final static Map<Integer, MapObjectType> objectTypes = Arrays.stream(MapObjectType.values())
             .collect(Collectors.toMap(MapObjectType::getSprite, v -> v));

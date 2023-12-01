@@ -3,6 +3,9 @@ package dslite.world.entity.generators;
 import dslite.utils.enums.ItemType;
 import dslite.world.entity.Item;
 import dslite.world.entity.food.Berries;
+import dslite.world.entity.food.Carrot;
+import dslite.world.entity.food.CookedBerries;
+import dslite.world.entity.food.CookedCarrot;
 import dslite.world.entity.resouces.*;
 import dslite.world.entity.survival.CampFire;
 import dslite.world.entity.survival.Garland;
@@ -19,12 +22,14 @@ public class ItemGenerator {
             case ROCK -> new Rock();
             case PICKAXE -> new Pickaxe();
             case BERRIES -> new Berries();
+            case CARROT -> new Carrot();
             case LOG -> new Log();
             case PETAL -> new Petal();
             case GOLD -> new Gold();
             case FLINT -> new Flint();
             case GARLAND -> new Garland();
-            case BERRIES_COOKED -> null;
+            case BERRIES_COOKED -> new CookedBerries();
+            case CARROT_COOKED -> new CookedCarrot();
         };
     }
 }

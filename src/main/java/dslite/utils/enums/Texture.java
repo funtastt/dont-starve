@@ -43,6 +43,9 @@ public enum Texture {
 
     BERRIES_COOKED(28, "Berries cooked", "/dslite/textures/food/berries_cooked.png"),
     FLINT(29, "Flint", "/dslite/textures/resources/flint.png"),
+    LUMPY_EVERGREEN(30, "Lumpy evergreen", "/dslite/textures/mining/lumpy_evergreen.png"),
+    CARROT(31, "Carrot", "/dslite/textures/food/carrot.png"),
+    CARROT_COOKED(32, "Carrot cooked", "/dslite/textures/food/carrot_cooked.png"),
     ;
     private final Image textureImage;
     private final int sprite;
