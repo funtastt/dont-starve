@@ -1,6 +1,6 @@
 package dslite.ui.tiles;
 
-import dslite.utils.enums.ObjectType;
+import dslite.utils.enums.MapObjectType;
 import dslite.utils.enums.Texture;
 import dslite.utils.enums.TileType;
 import dslite.world.entity.generators.MapObjectGenerator;
@@ -15,7 +15,7 @@ public final class TileWithObject extends Tile {
     public TileWithObject(TileType type, Point pos, int objectSprite) {
         super(type);
         this.objPosition = pos;
-        object = MapObjectGenerator.getObject(ObjectType.getBySprite(objectSprite));
+        object = MapObjectGenerator.getObject(MapObjectType.getBySprite(objectSprite));
 
         assert object != null;
         object.setTile(this);

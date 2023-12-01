@@ -47,21 +47,15 @@ public final class GameView {
         inventoryContainer.getChildren().add(inventory);
         inventoryContainer.setAlignment(Pos.BOTTOM_CENTER);
 
-        // TODO: сделать чтобы было по центру
-        VBox craftingViewContainer = new VBox();
-        craftingViewContainer.getChildren().add(craftingView);
-        craftingViewContainer.setAlignment(Pos.CENTER);
+        craftingView.setAlignment(Pos.CENTER);
         changeCraftViewVisibility();
 
-        VBox characteristicsContainer = new VBox();
-        characteristicsContainer.getChildren().add(characteristics);
-        characteristicsContainer.setAlignment(Pos.CENTER);
-        characteristicsContainer.setAlignment(Pos.CENTER_RIGHT);
+        characteristics.setAlignment(Pos.TOP_RIGHT);
 
         VBox gameContainer = new VBox();
         gameContainer.getChildren().add(gameScreen);
         gameContainer.setAlignment(Pos.CENTER);
-        mainPane.getChildren().addAll(gameContainer, inventoryContainer, craftingViewContainer, characteristicsContainer);
+        mainPane.getChildren().addAll(gameContainer, inventoryContainer, craftingView, characteristics);
 
         setKeyListener();
         enableView();
@@ -79,6 +73,7 @@ public final class GameView {
                 case C -> changeCraftViewVisibility();
                 case F12 -> MenuView.setGameStageFullScreen();
                 case SPACE -> player.interact();
+                case F -> player.place();
                 default -> {
                     if (code.isDigitKey()) {
                         player.getInventory().setSelectedSlot(Integer.parseInt(code.getChar()) - 1);
@@ -96,7 +91,14 @@ public final class GameView {
     }
 
     private void changeCraftViewVisibility() {
-        craftingView.setVisible(!craftingView.isVisible());
+        boolean visibility = craftingView.isVisible();
+
+        if (!visibility) {
+            craftingView.setVisible(true);
+            craftingView.toFront();
+        } else {
+            craftingView.setVisible(false);
+        }
     }
 
     private void enableView() {

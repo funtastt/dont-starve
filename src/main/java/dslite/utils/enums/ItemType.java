@@ -53,10 +53,6 @@ public enum ItemType {
         return Texture.getTextureBySprite(sprite);
     }
 
-    public int getObjectIndex() {
-        return miningResItemSprite;
-    }
-
     public boolean isPlaceable() {
         return isPlaceable;
     }

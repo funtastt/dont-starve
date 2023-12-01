@@ -9,7 +9,7 @@ public final class Point {
         this.y = y;
     }
 
-    public static int mDist(Point p1, Point p2) {
+    public static int manhattanDist(Point p1, Point p2) {
         int xDiff = p2.x - p1.x;
         int yDiff = p2.y - p1.y;
         return Math.abs(xDiff) + Math.abs(yDiff);

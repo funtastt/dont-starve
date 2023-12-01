@@ -1,35 +1,35 @@
 package dslite.world.entity;
 
-import dslite.utils.enums.ObjectType;
+import dslite.utils.enums.MapObjectType;
 import dslite.player.Player;
 import dslite.ui.tiles.TileWithObject;
 
 public abstract class MapObject {
 
     protected int sprite;
-    protected ObjectType type;
+    protected MapObjectType type;
     protected TileWithObject tile;
     protected byte quantity;
 
-    protected MapObject(ObjectType type) {
+    protected MapObject(MapObjectType type) {
         this.type = type;
         sprite = type.getSprite();
         quantity = 1;
     }
 
-    protected MapObject(ObjectType type, TileWithObject tile) {
+    protected MapObject(MapObjectType type, TileWithObject tile) {
         this(type);
         this.tile = tile;
     }
 
 
     protected MapObject(int index) {
-        this(ObjectType.getBySprite(index));
+        this(MapObjectType.getBySprite(index));
     }
 
     public abstract void interact(Player player);
 
-    public void setType(ObjectType type) {
+    public void setType(MapObjectType type) {
         this.type = type;
     }
 
@@ -41,7 +41,7 @@ public abstract class MapObject {
         this.quantity = quantity;
     }
 
-    public ObjectType getType() {
+    public MapObjectType getType() {
         return type;
     }
 

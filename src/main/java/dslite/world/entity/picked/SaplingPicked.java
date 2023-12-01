@@ -1,13 +1,13 @@
 package dslite.world.entity.picked;
 
 import dslite.player.Player;
-import dslite.utils.enums.ObjectType;
+import dslite.utils.enums.MapObjectType;
 import dslite.world.entity.MapObject;
 
 public final class SaplingPicked extends MapObject {
 
     public SaplingPicked() {
-        super(ObjectType.SAPLING_PICKED);
+        super(MapObjectType.SAPLING_PICKED);
     }
 
     @Override

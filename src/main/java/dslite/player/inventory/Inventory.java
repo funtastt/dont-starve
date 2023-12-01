@@ -87,6 +87,16 @@ public final class Inventory implements Updatable {
         return quantity - itemsLeft;
     }
 
+    public void removeSlot(Slot slot) {
+        for (Slot s : slots) {
+            if (s == slot) {
+                slot.init();
+                invDisplay.update();
+                return;
+            }
+        }
+        invDisplay.update();
+    }
 
     public Slot getSelectedSlot() {
         return selectedSlot;

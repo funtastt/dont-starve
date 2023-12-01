@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -90,6 +91,8 @@ public final class MenuView {
             gameStage.close();
         });
         getStage((Node) event.getSource()).hide();
+        gameStage.setFullScreenExitHint("");
+        gameStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("WINDOWS"));
         gameStage.showAndWait();
     }
 

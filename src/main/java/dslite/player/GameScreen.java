@@ -5,6 +5,7 @@ import dslite.ui.tiles.Tile;
 import dslite.utils.enums.TileType;
 import dslite.utils.enums.GameState;
 import dslite.world.World;
+import dslite.world.map.Point;
 import dslite.world.map.WorldMap;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
@@ -104,6 +105,19 @@ public final class GameScreen extends Canvas implements Updatable {
 
         for (int i = 0; i < ROWS_ON_SCREEN_COUNT; i++) {
             gc.strokeLine(0.0, i, COLUMNS_ON_SCREEN_COUNT, i);
+        }
+    }
+
+    public void drawTileAtPosition(Point pos) {
+        int posX = pos.getX() - camera.getxOffset();
+        int posY = pos.getY() - camera.getyOffset();
+
+        if (posX >= 0 && posX < COLUMNS_ON_SCREEN_COUNT && posY >= 0 && posY < ROWS_ON_SCREEN_COUNT) {
+            tileMap[pos.getX()][pos.getY()].draw(gc, posX, posY);
+
+            if (DRAW_GRID) {
+                gc.strokeRect(posX, posY, 1.0, 1.0);
+            }
         }
     }
 

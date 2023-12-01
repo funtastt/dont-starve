@@ -13,7 +13,7 @@ public final class CampFire extends Item implements Craftable {
     }
 
     public Map<ItemType, Integer> getRequirements() {
-        return Map.of(ItemType.CUT_GRASS, 10, ItemType.TWIGS, 6);
+        return Map.of(ItemType.CUT_GRASS, 1, ItemType.TWIGS, 1);
     }
 
 }

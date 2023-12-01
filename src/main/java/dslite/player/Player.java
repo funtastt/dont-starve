@@ -9,6 +9,7 @@ import dslite.utils.interfaces.Updatable;
 import dslite.utils.enums.Texture;
 import dslite.ui.tiles.Tile;
 import dslite.world.World;
+import dslite.world.entity.Item;
 import dslite.world.entity.generators.ItemGenerator;
 import dslite.world.map.WorldMap;
 import dslite.world.map.Point;
@@ -162,6 +163,10 @@ public final class Player implements Updatable {
         return tileMap[positionX][positionY];
     }
 
+    private void setTile(TileWithObject tile) {
+        tileMap[positionX][positionY] = tile;
+    }
+
     public void interact() {
         if (getTile() instanceof TileWithObject) {
             ((TileWithObject) getTile()).getObject().interact(this);
@@ -173,4 +178,33 @@ public final class Player implements Updatable {
             decreaseActions(1);
         }
     }
+
+    public void place() {
+        if (getTile() instanceof TileWithObject) return;
+
+        Item item = getEquippedItem();
+        if (item == null || !item.getType().isPlaceable()) return;
+
+        TileWithObject obj =
+                new TileWithObject(getTile().getType(), getPos(),
+                        item.getType().getPickedItemSprite());
+
+
+        obj.getObject().setQuantity((byte) getEquippedItemCount());
+        removeEquippedItem();
+        setTile(obj);
+    }
+
+    public Item getEquippedItem() {
+        return getInventory().getSelectedSlot().getStoredItem();
+    }
+
+    public int getEquippedItemCount() {
+        return getInventory().getSelectedSlot().getItemCount();
+    }
+
+    public void removeEquippedItem() {
+        getInventory().removeSlot(getInventory().getSelectedSlot());
+    }
+
 }

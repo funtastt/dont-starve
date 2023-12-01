@@ -1,14 +1,14 @@
 package dslite.world.entity.mining;
 
 import dslite.utils.enums.ItemType;
-import dslite.utils.enums.ObjectType;
+import dslite.utils.enums.MapObjectType;
 import dslite.player.Player;
 import dslite.world.entity.MapObject;
 import dslite.world.entity.picked.GrassPicked;
 
 public final class Grass extends MapObject {
     public Grass() {
-        super(ObjectType.GRASS);
+        super(MapObjectType.GRASS);
     }
 
     @Override

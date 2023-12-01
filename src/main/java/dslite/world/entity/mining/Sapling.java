@@ -2,13 +2,13 @@ package dslite.world.entity.mining;
 
 import dslite.player.Player;
 import dslite.utils.enums.ItemType;
-import dslite.utils.enums.ObjectType;
+import dslite.utils.enums.MapObjectType;
 import dslite.world.entity.MapObject;
 import dslite.world.entity.picked.SaplingPicked;
 
 public final class Sapling extends MapObject {
     public Sapling() {
-        super(ObjectType.SAPLING);
+        super(MapObjectType.SAPLING);
     }
 
     @Override

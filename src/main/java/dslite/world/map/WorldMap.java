@@ -1,14 +1,12 @@
 package dslite.world.map;
 
 import dslite.GameLauncher;
-import dslite.utils.enums.BiomeSize;
-import dslite.utils.enums.DifficultyLevel;
+import dslite.utils.enums.*;
 import dslite.ui.tiles.TileWithObject;
 import dslite.ui.views.GameView;
 import dslite.ui.views.MenuView;
 import dslite.ui.tiles.Tile;
-import dslite.utils.enums.TileType;
-import dslite.utils.enums.BiomeType;
+import dslite.world.entity.MapObject;
 
 import java.util.*;
 
@@ -19,11 +17,14 @@ public final class WorldMap {
 
     private Tile[][] tileMap;
 
+    private List<MapObject> updatableObjects;
+
     public static double MAX_FREQ = DifficultyLevel.AMATEUR.getFreq();
 
     public WorldMap(int width, int height) {
         this.width = width;
         this.height = height;
+        this.updatableObjects = new ArrayList<>();
 
         generateMap();
     }
@@ -165,5 +166,13 @@ public final class WorldMap {
 
     public Tile[][] getTilemap() {
         return tileMap;
+    }
+
+    public void addToUpdatable(MapObject obj) {
+        updatableObjects.add(obj);
+    }
+
+    public void removeFromUpdatable(MapObject obj) {
+        updatableObjects.remove(obj);
     }
 }
