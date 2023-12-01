@@ -4,7 +4,6 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +16,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dslite.views.MenuView">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dslite.ui.views.MenuView">
     <StackPane onMouseDragged="#handleDragEvent" onMousePressed="#handlePressEvent" prefHeight="24.0" prefWidth="625.0">
         <opaqueInsets>
             <Insets/>

@@ -1,5 +1,6 @@
-package dslite.views;
+package dslite.ui.views;
 
+import dslite.ui.inventory.InventoryItemRow;
 import dslite.utils.enums.BiomeSize;
 import dslite.utils.enums.DifficultyLevel;
 import dslite.utils.enums.MapSize;
@@ -13,7 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -52,6 +52,8 @@ public final class MenuView {
     private double yOffset;
     private Stage stage;
 
+    private static Stage gameStage;
+
     @FXML
     private final ObservableList<MapSize> mapSizeOptions = FXCollections.observableArrayList(
             MapSize.values()
@@ -67,15 +69,19 @@ public final class MenuView {
             DifficultyLevel.values()
     );
 
+    public static void addInventory(InventoryItemRow inventory) {
+        gameStage.setScene(new Scene(inventory));
+        gameStage.show();
+    }
+
     @FXML
     private void startGame(ActionEvent event) throws IOException {
-        Stage gameStage = new Stage(StageStyle.DECORATED);
+        gameStage = new Stage(StageStyle.DECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dslite/gamescreen.fxml"));
         Parent root = fxmlLoader.load();
 
         gameStage.setScene(new Scene(root));
-        gameStage.setWidth(1600.0);
-        gameStage.setHeight(900.0);
+        setGameStageFullScreen();
         gameStage.setTitle("Don't starve 2D");
         gameStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/dslite/ui/icon.png"))));
 
@@ -85,6 +91,11 @@ public final class MenuView {
         });
         getStage((Node) event.getSource()).hide();
         gameStage.showAndWait();
+    }
+
+    public static void setGameStageFullScreen() {
+        gameStage.setFullScreen(true);
+        gameStage.setResizable(false);
     }
 
     @FXML

@@ -4,7 +4,7 @@ import dslite.player.inventory.Inventory;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.ui.tiles.TileWithObject;
 import dslite.utils.enums.ItemType;
-import dslite.views.GameView;
+import dslite.ui.views.GameView;
 import dslite.utils.interfaces.Updatable;
 import dslite.utils.enums.Texture;
 import dslite.ui.tiles.Tile;

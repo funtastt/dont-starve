@@ -1,6 +1,6 @@
 package dslite.ui.characteristics;
 
-import dslite.views.GameView;
+import dslite.ui.views.GameView;
 import dslite.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;

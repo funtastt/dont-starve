@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum MapSize {
+    BABY(64, 64, "Baby"),
     TINY(128, 128, "Tiny"),
     SMALL(192, 192, "Small"),
     STANDARD(256, 256, "Standard"),

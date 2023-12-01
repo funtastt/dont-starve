@@ -3,9 +3,10 @@ package dslite.ui.crafting;
 
 import dslite.player.Player;
 import dslite.utils.enums.ItemType;
-import dslite.views.GameView;
+import dslite.ui.views.GameView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -29,7 +30,8 @@ public final class CraftingView extends VBox {
             player.craft(selectedType);
         });
 
-        setPrefHeight(700.0);
+        setPrefHeight(400.0);
+        setMaxHeight(400.0);
         setFocusTraversable(false);
         getChildren().addAll(tabPane, new StackPane(craftBtn));
     }
@@ -37,14 +39,24 @@ public final class CraftingView extends VBox {
     private void initTabPane() {
         tabPane = new TabPane();
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-        tabPane.setPrefWidth(300.0);
+        tabPane.setPrefWidth(250.0);
+        tabPane.setMaxWidth(250.0);
         tabPane.setPrefHeight(GameView.getGameScreen().getHeight());
         tabPane.setFocusTraversable(false);
         tabPane.setSide(Side.LEFT);
 
         ObservableList<ItemType> tools = FXCollections.observableArrayList(
-                ItemType.AXE
-        );
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE,
+                ItemType.AXE);
         Tab toolsTab = new Tab("Tools", new ItemList(tools, this));
 
         ObservableList<ItemType> survival = FXCollections.observableArrayList(
@@ -56,7 +68,8 @@ public final class CraftingView extends VBox {
 
     private void initCraftBtn() {
         craftBtn = new Button("Craft");
-        craftBtn.setPrefWidth(300.0);
+        craftBtn.setPrefWidth(250.0);
+        craftBtn.setMaxWidth(250.0);
         craftBtn.setFocusTraversable(false);
         craftBtn.setDisable(true);
         craftBtn.setOnAction(actionEvent -> setCraftBtn(GameView.getPlayer().canCraft(selectedType)));

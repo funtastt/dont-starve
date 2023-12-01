@@ -3,11 +3,11 @@ package dslite.utils.enums;
 import javafx.scene.paint.Color;
 
 public enum TileType {
-    WATER(Color.AQUA, false),
+    WATER(Color.rgb(67,100,146), false),
     GRASS(Color.YELLOWGREEN, true),
     FOREST(Color.FORESTGREEN, true),
     ROCKY(Color.GAINSBORO, true),
-    MARSH(Color.THISTLE, true),
+    MARSH(Color.rgb(140,105,77), true),
     SAVANNA(Color.GOLD, true),
     SAND(Color.MOCCASIN, true);
 

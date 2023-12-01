@@ -1,7 +1,7 @@
 package dslite.world.entity.tools;
 
 import dslite.utils.enums.ItemType;
-import dslite.views.GameView;
+import dslite.ui.views.GameView;
 import dslite.world.entity.Item;
 
 public abstract class Tool extends Item {

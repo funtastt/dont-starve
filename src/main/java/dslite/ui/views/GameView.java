@@ -1,10 +1,10 @@
-package dslite.views;
+package dslite.ui.views;
 
 
 import dslite.ui.crafting.CraftingView;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.player.Player;
-import dslite.player.Screen;
+import dslite.player.GameScreen;
 import dslite.ui.characteristics.MainCharacteristics;
 import dslite.world.World;
 import dslite.world.map.WorldMap;
@@ -14,22 +14,21 @@ import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public final class GameView {
     @FXML
-    private VBox mainPane;
+    private StackPane mainPane;
     private static World world;
     private static WorldMap map;
     private static Player player;
-    private static Screen gameScreen;
+    private static GameScreen gameScreen;
     private MainCharacteristics characteristics;
     private EventHandler<KeyEvent> keyHandler;
 
     private InventoryItemRow inventory;
     private CraftingView craftingView;
-
-
 
     @FXML
     public void initialize() {
@@ -37,18 +36,33 @@ public final class GameView {
         map = world.getMap();
         player = world.getPlayer();
 
-        gameScreen = Screen.getInstance();
+        gameScreen = GameScreen.getInstance();
         gameScreen.setWorld(world);
 
         characteristics = new MainCharacteristics();
 
         craftingView = new CraftingView();
 
-        HBox hbox = new HBox(25.0);
-        hbox.getChildren().addAll(craftingView, gameScreen, characteristics);
-        hbox.setAlignment(Pos.CENTER);
+        VBox inventoryContainer = new VBox();
+        inventoryContainer.getChildren().add(inventory);
+        inventoryContainer.setAlignment(Pos.BOTTOM_CENTER);
 
-        mainPane.getChildren().addAll(hbox, inventory);
+        // TODO: сделать чтобы было по центру
+        VBox craftingViewContainer = new VBox();
+        craftingViewContainer.getChildren().add(craftingView);
+        craftingViewContainer.setAlignment(Pos.CENTER);
+        changeCraftViewVisibility();
+
+        VBox characteristicsContainer = new VBox();
+        characteristicsContainer.getChildren().add(characteristics);
+        characteristicsContainer.setAlignment(Pos.CENTER);
+        characteristicsContainer.setAlignment(Pos.CENTER_RIGHT);
+
+        VBox gameContainer = new VBox();
+        gameContainer.getChildren().add(gameScreen);
+        gameContainer.setAlignment(Pos.CENTER);
+        mainPane.getChildren().addAll(gameContainer, inventoryContainer, craftingViewContainer, characteristicsContainer);
+
         setKeyListener();
         enableView();
     }
@@ -62,6 +76,8 @@ public final class GameView {
                 case A, LEFT -> player.move(-1, 0);
                 case S, DOWN -> player.move(0, 1);
                 case D, RIGHT -> player.move(1, 0);
+                case C -> changeCraftViewVisibility();
+                case F12 -> MenuView.setGameStageFullScreen();
                 case SPACE -> player.interact();
                 default -> {
                     if (code.isDigitKey()) {
@@ -77,6 +93,10 @@ public final class GameView {
             map.update();
         };
         mainPane.setOnKeyPressed(keyHandler);
+    }
+
+    private void changeCraftViewVisibility() {
+        craftingView.setVisible(!craftingView.isVisible());
     }
 
     private void enableView() {
@@ -106,7 +126,7 @@ public final class GameView {
         return player;
     }
 
-    public static Screen getGameScreen() {
+    public static GameScreen getGameScreen() {
         return gameScreen;
     }
 

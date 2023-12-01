@@ -6,20 +6,23 @@ import dslite.utils.enums.TileType;
 import dslite.utils.enums.GameState;
 import dslite.world.World;
 import dslite.world.map.WorldMap;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
+import javafx.stage.Screen;
 
-public final class Screen extends Canvas implements Updatable {
-    public static final int COLUMNS_ON_SCREEN_COUNT = 25;
-    public static final int ROWS_ON_SCREEN_COUNT = 25;
-    private static final double GAME_SCREEN_WIDTH = 700.0;
-    private static final double GAME_SCREEN_HEIGHT = 700.0;
+public final class GameScreen extends Canvas implements Updatable {
+    private static final int DEFAULT_GRID_SIZE = 27;
+    public static final int COLUMNS_ON_SCREEN_COUNT;
+    public static final int ROWS_ON_SCREEN_COUNT;
+    private static final double GAME_SCREEN_WIDTH;
+    private static final double GAME_SCREEN_HEIGHT;
     private static final boolean DRAW_GRID = true;
-    private static final double GRID_THICKNESS = 0.01;
-    private static final double singleCellWidth = Math.round(GAME_SCREEN_WIDTH / COLUMNS_ON_SCREEN_COUNT);
-    private static final double singleCellHeight = Math.round(GAME_SCREEN_HEIGHT / ROWS_ON_SCREEN_COUNT);
+    private static final double GRID_THICKNESS = 0.004;
+    private static final double singleCellWidth;
+    private static final double singleCellHeight;
     private final GraphicsContext gc = getGraphicsContext2D();
 
     private Player player;
@@ -28,10 +31,24 @@ public final class Screen extends Canvas implements Updatable {
     private WorldMap map;
     private Tile[][] tileMap;
 
-    private static Screen instance = null;
+    private static GameScreen instance = null;
 
-    private Screen() {
+    static {
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getBounds();
+        GAME_SCREEN_WIDTH = bounds.getWidth();
+        GAME_SCREEN_HEIGHT = bounds.getHeight();
+        double cellSize = Math.min(GAME_SCREEN_WIDTH / DEFAULT_GRID_SIZE, GAME_SCREEN_HEIGHT / DEFAULT_GRID_SIZE);
+        singleCellWidth = cellSize;
+        singleCellHeight = cellSize;
+        COLUMNS_ON_SCREEN_COUNT = (int) (GAME_SCREEN_WIDTH / cellSize);
+        ROWS_ON_SCREEN_COUNT = (int) (GAME_SCREEN_HEIGHT / cellSize);
+    }
+
+    private GameScreen() {
+
         super(GAME_SCREEN_WIDTH, GAME_SCREEN_HEIGHT);
+
         prefWidth(GAME_SCREEN_WIDTH);
         prefHeight(GAME_SCREEN_HEIGHT);
 
@@ -58,8 +75,8 @@ public final class Screen extends Canvas implements Updatable {
         int xOffset = camera.getxOffset();
         int yOffset = camera.getyOffset();
 
-        for (int i = 0; i < ROWS_ON_SCREEN_COUNT; i++) {
-            for (int j = 0; j < COLUMNS_ON_SCREEN_COUNT; j++) {
+        for (int i = 0; i < COLUMNS_ON_SCREEN_COUNT; i++) {
+            for (int j = 0; j < ROWS_ON_SCREEN_COUNT; j++) {
                 int posX = xOffset + i;
                 int posY = yOffset + j;
                 if (posX > 0 && posX < map.getWidth() && posY > 0 && posY < map.getHeight()) {
@@ -107,8 +124,8 @@ public final class Screen extends Canvas implements Updatable {
         drawPlayer(player);
     }
 
-    public static Screen getInstance() {
-        return instance == null ? new Screen() : instance;
+    public static GameScreen getInstance() {
+        return instance == null ? new GameScreen() : instance;
     }
 
 }

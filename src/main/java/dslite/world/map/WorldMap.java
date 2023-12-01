@@ -4,8 +4,8 @@ import dslite.GameLauncher;
 import dslite.utils.enums.BiomeSize;
 import dslite.utils.enums.DifficultyLevel;
 import dslite.ui.tiles.TileWithObject;
-import dslite.views.GameView;
-import dslite.views.MenuView;
+import dslite.ui.views.GameView;
+import dslite.ui.views.MenuView;
 import dslite.ui.tiles.Tile;
 import dslite.utils.enums.TileType;
 import dslite.utils.enums.BiomeType;
@@ -32,9 +32,8 @@ public final class WorldMap {
         List<Biome> biomes = new ArrayList<>();
         Set<Point> biomePoints = new HashSet<>();
 
-        int biomeNum = (int) (BiomeSize.getFreq(MenuView.getBiomeSize()) * width * height);
-
-        biomeNum += GameLauncher.RANDOM.nextInt(100);
+        BiomeSize size = BiomeSize.getBiomeSize(MenuView.getBiomeSize());
+        int biomeNum = (int) (size.getFreq() * width * height) + GameLauncher.RANDOM.nextInt(size.getExtra());
 
         while (biomePoints.size() < biomeNum) {
             biomePoints.add(new Point(GameLauncher.RANDOM.nextInt(width - 1), GameLauncher.RANDOM.nextInt(height - 1)));
