@@ -6,18 +6,18 @@ import dslite.world.entity.Item;
 
 public abstract class Tool extends Item {
 
-    protected byte durability;
+    protected int durability;
 
     public Tool(ItemType type, byte durability) {
         super(type);
         this.durability = durability;
     }
 
-    public byte getDurability() {
+    public int getDurability() {
         return durability;
     };
 
-    public void setDurability(byte durability) {
+    public void setDurability(int durability) {
         this.durability += durability;
         if (getDurability() <= 0) {
             GameView.getPlayer().getInventory().removeItem(this);

@@ -92,7 +92,7 @@ public final class MenuView {
         });
         getStage((Node) event.getSource()).hide();
         gameStage.setFullScreenExitHint("");
-        gameStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("ESC"));
+        gameStage.setFullScreenExitKeyCombination(KeyCombination.keyCombination("WINDOWS"));
         gameStage.showAndWait();
     }
 

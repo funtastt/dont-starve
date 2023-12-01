@@ -1,4 +1,4 @@
-package dslite.world.entity.survival;
+package dslite.world.entity.dropped;
 
 import dslite.player.Player;
 import dslite.ui.views.GameView;
@@ -16,7 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CampFireMapObject extends MapObject implements Drawable, Updatable {
+public final class CampFireBuilt extends MapObject implements Drawable, Updatable {
 
     private final Point position;
     private final int placedAtDayNum;
@@ -27,7 +27,7 @@ public final class CampFireMapObject extends MapObject implements Drawable, Upda
 
     private final List<Point> litTiles;
 
-    public CampFireMapObject() {
+    public CampFireBuilt() {
         super(MapObjectType.CAMPFIRE);
         position = player.getPos();
         placedAtDayNum = world.getDayCount();

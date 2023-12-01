@@ -46,21 +46,13 @@ public final class CraftingView extends VBox {
         tabPane.setSide(Side.LEFT);
 
         ObservableList<ItemType> tools = FXCollections.observableArrayList(
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
-                ItemType.AXE,
+                ItemType.PICKAXE,
                 ItemType.AXE);
         Tab toolsTab = new Tab("Tools", new ItemList(tools, this));
 
         ObservableList<ItemType> survival = FXCollections.observableArrayList(
-                ItemType.CAMPFIRE
+                ItemType.CAMPFIRE,
+                ItemType.GARLAND
         );
         Tab survivalTab = new Tab("Survival", new ItemList(survival, this));
         tabPane.getTabs().addAll(toolsTab, survivalTab);

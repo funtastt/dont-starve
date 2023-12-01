@@ -4,21 +4,27 @@ import java.util.Map;
 
 public enum BiomeType {
     FOREST(TileType.FOREST, Map.of(
+            Texture.FLOWER.getSprite(), 1.0,
             Texture.GRASS.getSprite(), 0.5,
             Texture.SAPLING.getSprite(), 0.5)),
     GRASSLANDS(TileType.GRASS, Map.of(
+            Texture.BOULDER.getSprite(), 1.0,
             Texture.GRASS.getSprite(), 0.5,
             Texture.SAPLING.getSprite(), 0.5)),
     MARSH(TileType.MARSH, Map.of(
+            Texture.GOLD.getSprite(), 1.0,
             Texture.GRASS.getSprite(), 0.5,
             Texture.SAPLING.getSprite(), 0.5)),
     SAVANNA(TileType.SAVANNA, Map.of(
+            Texture.FLOWER.getSprite(), 1.0,
             Texture.GRASS.getSprite(), 0.5,
             Texture.SAPLING.getSprite(), 0.5)),
     DESERT(TileType.SAND, Map.of(
+            Texture.FLOWER.getSprite(), 1.0,
             Texture.GRASS.getSprite(), 0.5,
             Texture.SAPLING.getSprite(), 0.5)),
     ROCKY_LAND(TileType.ROCKY, Map.of(
+            Texture.SPIKY_BUSH.getSprite(), 1.0,
             Texture.GRASS.getSprite(), 0.5,
             Texture.SAPLING.getSprite(), 0.5));
 

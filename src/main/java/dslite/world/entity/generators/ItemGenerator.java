@@ -2,10 +2,12 @@ package dslite.world.entity.generators;
 
 import dslite.utils.enums.ItemType;
 import dslite.world.entity.Item;
-import dslite.world.entity.resouces.CutGrass;
-import dslite.world.entity.resouces.Twigs;
+import dslite.world.entity.food.Berries;
+import dslite.world.entity.resouces.*;
 import dslite.world.entity.survival.CampFire;
+import dslite.world.entity.survival.Garland;
 import dslite.world.entity.tools.Axe;
+import dslite.world.entity.tools.Pickaxe;
 
 public class ItemGenerator {
     public static Item getItem(ItemType type) {
@@ -14,6 +16,15 @@ public class ItemGenerator {
             case CAMPFIRE -> new CampFire();
             case CUT_GRASS -> new CutGrass();
             case TWIGS -> new Twigs();
+            case ROCK -> new Rock();
+            case PICKAXE -> new Pickaxe();
+            case BERRIES -> new Berries();
+            case LOG -> new Log();
+            case PETAL -> new Petal();
+            case GOLD -> new Gold();
+            case FLINT -> new Flint();
+            case GARLAND -> new Garland();
+            case BERRIES_COOKED -> null;
         };
     }
 }

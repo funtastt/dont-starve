@@ -23,7 +23,71 @@ public enum ItemType {
     TWIGS(
             Texture.TWIGS.getSprite(),
             Texture.TWIGS.getName(),
-            (Texture.SAPLING.getSprite()),
+            Texture.SAPLING.getSprite(),
+            true
+    ),
+
+    ROCK(
+            Texture.ROCK.getSprite(),
+            Texture.ROCK.getName(),
+            Texture.BOULDER.getSprite(),
+            true
+    ),
+
+    PICKAXE(
+            Texture.PICKAXE.getSprite(),
+            Texture.PICKAXE.getName(),
+            Texture.PICKAXE.getSprite(),
+            false
+    ),
+
+    BERRIES(
+            Texture.BERRIES.getSprite(),
+            Texture.BERRIES.getName(),
+            Texture.BUSH.getSprite(),
+            true
+    ),
+
+    LOG(
+            Texture.LOG.getSprite(),
+            Texture.LOG.getName(),
+            Texture.EVERGREEN.getSprite(),
+            true
+    ),
+
+    PETAL(
+            Texture.PETALS.getSprite(),
+            Texture.PETALS.getName(),
+            Texture.FLOWER.getSprite(),
+            true
+    ),
+
+    GOLD(
+            Texture.GOLD.getSprite(),
+            Texture.GOLD.getName(),
+            Texture.GOLD.getSprite(),
+            true
+    ),
+
+    FLINT(
+            Texture.FLINT.getSprite(),
+            Texture.FLINT.getName(),
+            Texture.FLINT.getSprite(),
+            true
+    ),
+
+
+    GARLAND(
+            Texture.GARLAND.getSprite(),
+            Texture.GARLAND.getName(),
+            Texture.GARLAND.getSprite(),
+            false
+    ),
+
+    BERRIES_COOKED(
+            Texture.BERRIES_COOKED.getSprite(),
+            Texture.BERRIES_COOKED.getName(),
+            Texture.BERRIES.getSprite(),
             true
     );
 
@@ -33,12 +97,12 @@ public enum ItemType {
     private final boolean isPlaceable;
     private final boolean isStackable;
 
-    ItemType(int pickedItemSprite, String name, int miningResItemSprite, boolean isStackable) {
-        this.pickedItemSprite = pickedItemSprite;
+    ItemType(int itemInInvSprite, String name, int itemOnMapSprite, boolean isStackable) {
+        this.pickedItemSprite = itemInInvSprite;
         this.name = name;
-        this.miningResItemSprite = miningResItemSprite;
+        this.miningResItemSprite = itemOnMapSprite;
         this.isStackable = isStackable;
-        this.isPlaceable = miningResItemSprite != -1;
+        this.isPlaceable = itemOnMapSprite != -1;
     }
 
     public String getName() {

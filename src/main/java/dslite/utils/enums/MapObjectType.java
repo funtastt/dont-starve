@@ -12,7 +12,25 @@ public enum MapObjectType {
     SAPLING_PICKED(Texture.SAPLING_PICKED.getSprite()),
     CUT_GRASS(Texture.CUT_GRASS.getSprite()),
     TWIGS(Texture.TWIGS.getSprite()),
-    CAMPFIRE(Texture.CAMPFIRE.getSprite());
+    CAMPFIRE(Texture.CAMPFIRE.getSprite()),
+    BOULDER(Texture.BOULDER.getSprite()),
+    BOULDER_FLINTLESS(Texture.BOULDER_FLINTLESS.getSprite()),
+    BUSH(Texture.BUSH.getSprite()),
+    BUSH_PICKED(Texture.BUSH_PICKED.getSprite()),
+    EVERGREEN(Texture.EVERGREEN.getSprite()),
+    FLOWER(Texture.FLOWER.getSprite()),
+    GOLD_VEIN(Texture.GOLD_VEIN.getSprite()),
+    SPIKY_BUSH(Texture.SPIKY_BUSH.getSprite()),
+    SPIKY_BUSH_PICKED(Texture.SPIKY_BUSH_PICKED.getSprite()),
+    SPIKY_TREE(Texture.SPIKY_TREE.getSprite()),
+    GOLD(Texture.GOLD.getSprite()),
+    AXE(Texture.AXE.getSprite()),
+    PICKAXE(Texture.PICKAXE.getSprite()),
+    GARLAND(Texture.GARLAND.getSprite()),
+    PETAL(Texture.PETALS.getSprite()),
+    LOG(Texture.LOG.getSprite()),
+    BERRIES(Texture.BERRIES.getSprite()),
+    ROCK(Texture.ROCK.getSprite());
     private final int sprite;
     private final static Map<Integer, MapObjectType> objectTypes = Arrays.stream(MapObjectType.values())
             .collect(Collectors.toMap(MapObjectType::getSprite, v -> v));
