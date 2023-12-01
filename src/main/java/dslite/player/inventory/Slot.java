@@ -1,7 +1,8 @@
-package dslite.inventory;
+package dslite.player.inventory;
 
 import dslite.utils.enums.ItemType;
 import dslite.world.entity.Item;
+import dslite.world.entity.generators.ItemGenerator;
 
 public final class Slot {
     private Item storedItem;
@@ -47,7 +48,7 @@ public final class Slot {
     void setStoredItem(ItemType itemType) {
         init();
         storedItemType = itemType;
-        storedItem = ItemType.getItemBySprite(itemType.getMiningResItemSprite());
+        storedItem = ItemGenerator.getItem(itemType);
         if (!itemType.isStackable()) {
             stackSize = 1;
         }

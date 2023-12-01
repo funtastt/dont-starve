@@ -13,7 +13,7 @@ public final class Grass extends MapObject {
 
     @Override
     public void interact(Player player) {
-        if (!player.getInventory().addItemAndCheck(ItemType.CUT_GRASS, getQuantity())) return;
+        if (!player.getInventory().addItem(ItemType.CUT_GRASS, getQuantity())) return;
 
         player.decreaseActions(1);
         getTile().setObject(new GrassPicked());

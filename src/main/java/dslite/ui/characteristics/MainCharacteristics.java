@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 public final class MainCharacteristics extends VBox {
-
     private final StatisticsBox health;
     private final StatisticsBox hunger;
     private final StatisticsBox sanity;
@@ -23,7 +22,7 @@ public final class MainCharacteristics extends VBox {
         setAlignment(Pos.TOP_LEFT);
 
         health = new StatisticsBox("Health: ", Player.MAX_HEALTH);
-        hunger = new StatisticsBox("Hunger: ", Player.MAX_HUNGER);
+        hunger = new StatisticsBox("Hunger: ", Player.MAX_SATIETY);
         sanity = new StatisticsBox("Sanity: ", Player.MAX_SANITY);
         ap = new ElementaryStatisticsBox("Actions left: ");
 
@@ -34,7 +33,7 @@ public final class MainCharacteristics extends VBox {
 
     public void update() {
         setHealth(player.getHealth());
-        setHunger(player.getHunger());
+        setHunger(player.getSatiety());
         setSanity(player.getSanity());
         setActionPoints(player.getActions());
     }

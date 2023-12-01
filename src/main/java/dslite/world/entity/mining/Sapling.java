@@ -13,7 +13,7 @@ public final class Sapling extends MapObject {
 
     @Override
     public void interact(Player player) {
-        if (!player.getInventory().addItemAndCheck(ItemType.TWIGS, getQuantity())) return;
+        if (!player.getInventory().addItem(ItemType.TWIGS, getQuantity())) return;
 
         player.decreaseActions(1);
         getTile().setObject(new SaplingPicked());

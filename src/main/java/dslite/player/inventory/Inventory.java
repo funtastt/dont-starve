@@ -1,10 +1,15 @@
-package dslite.inventory;
+package dslite.player.inventory;
 
 import dslite.utils.enums.ItemType;
+import dslite.utils.interfaces.Craftable;
 import dslite.utils.interfaces.Updatable;
 import dslite.player.Player;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.world.entity.Item;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
 
 public final class Inventory implements Updatable {
     public static final byte MAX_SLOT_SIZE = 10;
@@ -39,7 +44,7 @@ public final class Inventory implements Updatable {
         }
     }
 
-    public boolean addItemAndCheck(ItemType itemType, int quantity) {
+    public boolean addItem(ItemType itemType, int quantity) {
         int addedItems = 0;
         while (addedItems < quantity) {
             Slot s = availableSlotFor(itemType);
@@ -99,5 +104,53 @@ public final class Inventory implements Updatable {
 
     public Slot[] getSlots() {
         return slots;
+    }
+
+    public boolean tryToCraft(Item item, boolean craft) {
+        if (!(item instanceof Craftable)) return false;
+
+        Map<ItemType, Integer> requirements = ((Craftable) item).getRequirements();
+
+        int possibleSlots = (int) requirements
+                .entrySet().stream()
+                .filter(entry -> getItemCountFor(entry.getKey()) >= entry.getValue())
+                .count();
+
+        if (possibleSlots >= requirements.entrySet().size()) {
+            if (!craft) return true;
+            requirements.forEach((itemType, integer) -> {
+                removeItemByType(itemType, integer);
+                invDisplay.update();
+            });
+
+            if (availableSlotFor(item.getType()) == null) {
+                requirements.forEach(this::addItem);
+                return false;
+            } else {
+                addItem(item.getType(), 1);
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public int getItemCountFor(ItemType type) {
+        int count = 0;
+        for (Slot s : slots) {
+            if (s.getStoredItemType() == type) {
+                count += s.getItemCount();
+            }
+        }
+        return count;
+    }
+
+    public void removeItem(Item item) {
+        for (Slot s : slots) {
+            if (s.getStoredItem() == item) {
+                s.init();
+            }
+        }
+        invDisplay.update();
     }
 }

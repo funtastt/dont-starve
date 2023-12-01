@@ -1,6 +1,7 @@
 package dslite.views;
 
 
+import dslite.ui.crafting.CraftingView;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.player.Player;
 import dslite.player.Screen;
@@ -26,6 +27,8 @@ public final class GameView {
     private EventHandler<KeyEvent> keyHandler;
 
     private InventoryItemRow inventory;
+    private CraftingView craftingView;
+
 
 
     @FXML
@@ -39,8 +42,10 @@ public final class GameView {
 
         characteristics = new MainCharacteristics();
 
+        craftingView = new CraftingView();
+
         HBox hbox = new HBox(25.0);
-        hbox.getChildren().addAll(gameScreen, characteristics);
+        hbox.getChildren().addAll(craftingView, gameScreen, characteristics);
         hbox.setAlignment(Pos.CENTER);
 
         mainPane.getChildren().addAll(hbox, inventory);
@@ -78,12 +83,14 @@ public final class GameView {
         gameScreen.setDisable(false);
         gameScreen.setFocusTraversable(true);
         characteristics.setDisable(false);
+        craftingView.setDisable(false);
         mainPane.setOnKeyPressed(keyHandler);
     }
 
     private void disableView() {
         gameScreen.setDisable(true);
         characteristics.setDisable(true);
+        craftingView.setDisable(true);
         mainPane.getScene().removeEventHandler(KeyEvent.ANY, keyHandler);
     }
 
@@ -117,5 +124,9 @@ public final class GameView {
 
     public InventoryItemRow getInventory() {
         return inventory;
+    }
+
+    public CraftingView getCraftingView() {
+        return craftingView;
     }
 }

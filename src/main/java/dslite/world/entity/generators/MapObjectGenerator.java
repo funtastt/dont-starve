@@ -1,4 +1,4 @@
-package dslite.world.entity.generator;
+package dslite.world.entity.generators;
 
 import dslite.utils.enums.ObjectType;
 import dslite.utils.enums.Texture;

@@ -17,9 +17,9 @@ public final class World implements Updatable {
     private GameState gameState;
 
     //Initial values
-    public static final byte ACTIONS_PER_DAYTIME = 85;
-    public static final byte ACTIONS_PER_NIGHTTIME = 30;
-    public static final byte DAY_LENGTH = ACTIONS_PER_DAYTIME + ACTIONS_PER_NIGHTTIME;
+    public static final int ACTIONS_PER_DAYTIME = 510;
+    public static final int ACTIONS_PER_NIGHTTIME = 180;
+    public static final int DAY_LENGTH = ACTIONS_PER_DAYTIME + ACTIONS_PER_NIGHTTIME;
 
     public World(GameView controller) {
         this.controller = controller;

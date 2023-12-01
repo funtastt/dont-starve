@@ -1,7 +1,7 @@
 package dslite.ui.inventory;
 
-import dslite.inventory.Inventory;
-import dslite.inventory.Slot;
+import dslite.player.inventory.Inventory;
+import dslite.player.inventory.Slot;
 import dslite.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;

@@ -3,7 +3,7 @@ package dslite.ui.tiles;
 import dslite.utils.enums.ObjectType;
 import dslite.utils.enums.Texture;
 import dslite.utils.enums.TileType;
-import dslite.world.entity.generator.MapObjectGenerator;
+import dslite.world.entity.generators.MapObjectGenerator;
 import dslite.world.entity.MapObject;
 import dslite.world.map.Point;
 import javafx.scene.canvas.GraphicsContext;

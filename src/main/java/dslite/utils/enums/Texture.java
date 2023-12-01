@@ -11,14 +11,17 @@ public enum Texture {
     WILSON(1, "Wilson", "/dslite/textures/characters/wilson.png"),
 
     // GRASS
-    GRASS(2, "Grass", "/dslite/textures/mining_res/grass.png"),
-    CUT_GRASS(3, "Cut grass", "/dslite/textures/mining_res/cut_grass.png"),
-    GRASS_PICKED(4, "Grass picked", "/dslite/textures/mining_res/grass_picked.png"),
+    GRASS(2, "Grass", "/dslite/textures/mining/grass.png"),
+    CUT_GRASS(3, "Cut grass", "/dslite/textures/mining/cut_grass.png"),
+    GRASS_PICKED(4, "Grass picked", "/dslite/textures/mining/grass_picked.png"),
 
     // TWIGS
-    SAPLING(5, "Sapling", "/dslite/textures/mining_res/sapling.png"),
-    SAPLING_PICKED(6, "Sapling picked", "/dslite/textures/mining_res/sapling_picked.png"),
-    TWIGS(7, "Twigs", "/dslite/textures/mining_res/twigs.png");
+    SAPLING(5, "Sapling", "/dslite/textures/mining/sapling.png"),
+    SAPLING_PICKED(6, "Sapling picked", "/dslite/textures/mining/sapling_picked.png"),
+    TWIGS(7, "Twigs", "/dslite/textures/mining/twigs.png"),
+
+    AXE(8, "Axe", "/dslite/textures/tools/axe.png"),
+    CAMPFIRE(9, "Campfire", "/dslite/textures/survival/campfire.png");
     private final Image textureImage;
     private final int sprite;
     private final String name;

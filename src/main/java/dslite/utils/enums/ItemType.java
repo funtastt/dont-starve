@@ -1,28 +1,30 @@
 package dslite.utils.enums;
 
-import dslite.world.entity.Item;
-import dslite.world.entity.resouces.CutGrass;
-import dslite.world.entity.resouces.Twigs;
+
 import javafx.scene.image.Image;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 public enum ItemType {
+    AXE(
+            Texture.AXE.getSprite(),
+            Texture.AXE.getName(),
+            Texture.AXE.getSprite(),
+            false),
+    CAMPFIRE(
+            Texture.CAMPFIRE.getSprite(),
+            Texture.CAMPFIRE.getName(),
+            Texture.CAMPFIRE.getSprite(),
+            false),
     CUT_GRASS(
             Texture.CUT_GRASS.getSprite(),
             Texture.CUT_GRASS.getName(),
             Texture.GRASS.getSprite(),
-            true,
-            new CutGrass()),
+            true),
 
     TWIGS(
             Texture.TWIGS.getSprite(),
             Texture.TWIGS.getName(),
             (Texture.SAPLING.getSprite()),
-            true,
-            new Twigs()
+            true
     );
 
     private final int pickedItemSprite;
@@ -30,18 +32,13 @@ public enum ItemType {
     private final int miningResItemSprite;
     private final boolean isPlaceable;
     private final boolean isStackable;
-    private final Item item;
 
-    private final static Map<Integer, Item> items = Arrays.stream(ItemType.values())
-            .collect(Collectors.toMap(k -> k.miningResItemSprite, v -> v.item));
-
-    ItemType(int pickedItemSprite, String name, int miningResItemSprite, boolean isStackable, Item item) {
+    ItemType(int pickedItemSprite, String name, int miningResItemSprite, boolean isStackable) {
         this.pickedItemSprite = pickedItemSprite;
         this.name = name;
         this.miningResItemSprite = miningResItemSprite;
         this.isStackable = isStackable;
         this.isPlaceable = miningResItemSprite != -1;
-        this.item = item;
     }
 
     public String getName() {
@@ -68,9 +65,6 @@ public enum ItemType {
         return isStackable;
     }
 
-    public static Item getItemBySprite(int sprite) {
-        return items.get(sprite);
-    }
 
     public int getMiningResItemSprite() {
         return miningResItemSprite;
