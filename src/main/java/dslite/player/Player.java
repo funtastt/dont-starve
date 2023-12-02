@@ -4,7 +4,7 @@ import dslite.player.inventory.Inventory;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.ui.tiles.TileWithObject;
 import dslite.utils.enums.ItemType;
-import dslite.ui.views.GameView;
+import dslite.controllers.GameController;
 import dslite.utils.interfaces.Updatable;
 import dslite.utils.enums.Texture;
 import dslite.ui.tiles.Tile;
@@ -27,7 +27,7 @@ public final class Player implements Updatable {
     private double sanity;
     private double satiety;
     private int actions;
-    private GameView controller;
+    private GameController controller;
     private WorldMap map;
     private World world;
     private Tile[][] tileMap;
@@ -62,7 +62,7 @@ public final class Player implements Updatable {
     @Override
     public void update() {
         // Update everything
-        GameView.getGameScreen().drawPlayer(this);
+        GameController.getGameScreen().drawPlayer(this);
         hasCampFireNearby = false;
         inventory.update();
         controller.getCharacteristics().update();
@@ -117,7 +117,7 @@ public final class Player implements Updatable {
         return map;
     }
 
-    public GameView getController() {
+    public GameController getController() {
         return controller;
     }
 

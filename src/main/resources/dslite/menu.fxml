@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="400.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dslite.ui.views.MenuView">
+<?import javafx.scene.control.TextField?>
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="1000" minHeight="1000" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="dslite.controllers.MenuController">
     <StackPane onMouseDragged="#handleDragEvent" onMousePressed="#handlePressEvent" prefHeight="24.0" prefWidth="625.0">
         <opaqueInsets>
             <Insets/>
@@ -65,7 +65,7 @@
         </font>
     </Label>
     <Line endX="305.0" layoutX="300.5" layoutY="80.0" startX="-280.0"/>
-    <VBox layoutX="58.0" layoutY="105.0" prefHeight="181.0" prefWidth="627.0" spacing="20.0"
+    <VBox layoutX="58.0" layoutY="105.0" prefHeight="481.0" prefWidth="627.0" spacing="20.0"
           AnchorPane.leftAnchor="58.0" AnchorPane.rightAnchor="58.0">
         <HBox fx:id="wSizeBox" spacing="100.0">
             <Label contentDisplay="TOP" prefHeight="47.0" prefWidth="192.0" text="World Size:">
@@ -88,8 +88,32 @@
                 </font>
             </Label>
         </HBox>
+        <HBox fx:id="hostBox" spacing="10.0">
+            <Label contentDisplay="TOP" prefHeight="47.0" prefWidth="192.0" text="Host:">
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="hostTextField" prefHeight="35.0" prefWidth="200.0"/>
+        </HBox>
+        <HBox fx:id="nicknameBox" spacing="10.0">
+            <Label contentDisplay="TOP" prefHeight="47.0" prefWidth="192.0" text="Nickname:">
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="usernameTextField" prefHeight="35.0" prefWidth="200.0"/>
+        </HBox>
+        <HBox fx:id="portBox" spacing="10.0">
+            <Label contentDisplay="TOP" prefHeight="47.0" prefWidth="192.0" text="Port:">
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="portTextField" prefHeight="35.0" prefWidth="200.0"/>
+        </HBox>
     </VBox>
-    <Button fx:id="generateBtn" focusTraversable="false" layoutX="237.0" layoutY="331.0" mnemonicParsing="false"
+    <Button fx:id="generateBtn" focusTraversable="false" layoutX="237.0" layoutY="531.0" mnemonicParsing="false"
             onAction="#startGame" prefHeight="47.0" prefWidth="127.0" text="Generate!" AnchorPane.leftAnchor="237.0"
             AnchorPane.rightAnchor="236.0"/>
 </AnchorPane>

@@ -1,6 +1,6 @@
 package dslite.world.entity.survival;
 
-import dslite.ui.views.GameView;
+import dslite.controllers.GameController;
 import dslite.utils.enums.ItemType;
 import dslite.utils.interfaces.Craftable;
 import dslite.utils.interfaces.Updatable;
@@ -21,7 +21,7 @@ public final class Garland extends Item implements Craftable, Updatable {
     @Override
     public void update() {
         if (--durability <= 0) {
-            GameView.getPlayer().getInventory().removeItem(this);
+            GameController.getPlayer().getInventory().removeItem(this);
         }
     }
 

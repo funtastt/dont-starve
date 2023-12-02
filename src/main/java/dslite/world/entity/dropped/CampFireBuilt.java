@@ -1,7 +1,7 @@
 package dslite.world.entity.dropped;
 
 import dslite.player.Player;
-import dslite.ui.views.GameView;
+import dslite.controllers.GameController;
 import dslite.utils.enums.GameState;
 import dslite.utils.enums.MapObjectType;
 import dslite.utils.interfaces.Drawable;
@@ -22,7 +22,7 @@ public final class CampFireBuilt extends MapObject implements Drawable, Updatabl
     private final int placedAtDayNum;
     private static final int LIGHT_DIST = 7;
 
-    private final World world = GameView.getWorld();
+    private final World world = GameController.getWorld();
     private final Player player = world.getPlayer();
 
     private final List<Point> litTiles;
@@ -35,7 +35,7 @@ public final class CampFireBuilt extends MapObject implements Drawable, Updatabl
         WorldMap map = world.getMap();
         map.addToUpdatable(this);
 
-        Player player = GameView.getPlayer();
+        Player player = GameController.getPlayer();
         player.decreaseActions(2);
 
 
@@ -55,15 +55,15 @@ public final class CampFireBuilt extends MapObject implements Drawable, Updatabl
     public void update() {
         if (world.getDayCount() > placedAtDayNum) {
             Platform.runLater(() -> {
-                GameView.getMap().setTileAtPosition(position, getTile().getType());
-                GameView.getMap().removeFromUpdatable(this);
+                GameController.getMap().setTileAtPosition(position, getTile().getType());
+                GameController.getMap().removeFromUpdatable(this);
             });
         }
 
         if (world.getGameState() == GameState.NIGHT) {
 
             //Draws itself
-            draw(GameView.getGameScreen().getGraphicsContext2D(), position.getX(), position.getY());
+            draw(GameController.getGameScreen().getGraphicsContext2D(), position.getX(), position.getY());
 
             if (!player.hasCampFireNearby()) {
                 if (Point.manhattanDist(position, new Point(player.getPositionX(), player.getPositionY())) <= LIGHT_DIST) {
@@ -76,7 +76,7 @@ public final class CampFireBuilt extends MapObject implements Drawable, Updatabl
     @Override
     public void draw(GraphicsContext gc, int i, int j) {
         for (Point p : litTiles) {
-            GameView.getGameScreen().drawTileAtPosition(p);
+            GameController.getGameScreen().drawTileAtPosition(p);
         }
     }
 

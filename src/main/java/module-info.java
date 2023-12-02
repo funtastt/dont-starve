@@ -4,7 +4,6 @@ module com.example.exam_ {
     requires com.google.gson;
 
     exports dslite;
-    exports dslite.ui.views;
     exports dslite.ui.characteristics;
     exports dslite.ui.menu;
     exports dslite.ui.tiles;
@@ -18,6 +17,10 @@ module com.example.exam_ {
     exports dslite.world.entity.resouces;
     exports dslite.world.entity.picked;
 
-    opens dslite.ui.views to javafx.fxml;
     exports dslite.world.entity.generators;
+    exports dslite.controllers;
+    opens dslite.controllers to javafx.fxml;
+    exports dslite.ui.chat;
+    exports dslite.server;
+    exports dslite.client;
 }

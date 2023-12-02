@@ -3,10 +3,9 @@ package dslite.ui.crafting;
 
 import dslite.player.Player;
 import dslite.utils.enums.ItemType;
-import dslite.ui.views.GameView;
+import dslite.controllers.GameController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -26,7 +25,7 @@ public final class CraftingView extends VBox {
         initCraftBtn();
 
         craftBtn.setOnAction(actionEvent -> {
-            Player player = GameView.getPlayer();
+            Player player = GameController.getPlayer();
             player.craft(selectedType);
         });
 
@@ -41,7 +40,6 @@ public final class CraftingView extends VBox {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         tabPane.setPrefWidth(250.0);
         tabPane.setMaxWidth(250.0);
-        tabPane.setPrefHeight(GameView.getGameScreen().getHeight());
         tabPane.setFocusTraversable(false);
         tabPane.setSide(Side.LEFT);
 
@@ -64,13 +62,13 @@ public final class CraftingView extends VBox {
         craftBtn.setMaxWidth(250.0);
         craftBtn.setFocusTraversable(false);
         craftBtn.setDisable(true);
-        craftBtn.setOnAction(actionEvent -> setCraftBtn(GameView.getPlayer().canCraft(selectedType)));
+        craftBtn.setOnAction(actionEvent -> setCraftBtn(GameController.getPlayer().canCraft(selectedType)));
     }
 
 
     public void update() {
         if (selectedType != null) {
-            setCraftBtn(GameView.getPlayer().canCraft(selectedType));
+            setCraftBtn(GameController.getPlayer().canCraft(selectedType));
         }
     }
 

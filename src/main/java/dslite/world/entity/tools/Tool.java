@@ -1,7 +1,7 @@
 package dslite.world.entity.tools;
 
 import dslite.utils.enums.ItemType;
-import dslite.ui.views.GameView;
+import dslite.controllers.GameController;
 import dslite.world.entity.Item;
 
 public abstract class Tool extends Item {
@@ -20,7 +20,7 @@ public abstract class Tool extends Item {
     public void setDurability(int durability) {
         this.durability += durability;
         if (getDurability() <= 0) {
-            GameView.getPlayer().getInventory().removeItem(this);
+            GameController.getPlayer().getInventory().removeItem(this);
         }
     };
 }

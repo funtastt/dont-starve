@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public final class Inventory implements Updatable {
-    public static final byte MAX_SLOT_SIZE = 10;
+    public static final byte MAX_SLOT_SIZE = 9;
     public static final byte MAX_STACK_SIZE = 64;
     private Slot[] slots;
     private Slot selectedSlot;

@@ -19,7 +19,7 @@ public final class GameLauncher extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setWidth(625.0);
-        stage.setHeight(400.0);
+        stage.setHeight(600.0);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

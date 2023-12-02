@@ -1,6 +1,7 @@
-package dslite.ui.views;
+package dslite.controllers;
 
-import dslite.ui.inventory.InventoryItemRow;
+import dslite.ui.chat.ChatApplication;
+import dslite.client.UserConfig;
 import dslite.utils.enums.BiomeSize;
 import dslite.utils.enums.DifficultyLevel;
 import dslite.utils.enums.MapSize;
@@ -14,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.MouseEvent;
@@ -26,10 +29,19 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Objects;
 
+import static dslite.ui.chat.ChatApplication.getChatApplication;
 import static dslite.world.map.WorldMap.MAX_FREQ;
 
-public final class MenuView {
+public final class MenuController {
+    @FXML
 
+    public TextField hostTextField;
+    public TextField usernameTextField;
+    public TextField portTextField;
+    public Button generateBtn;
+    public HBox portBox;
+    public HBox nicknameBox;
+    public HBox hostBox;
     @FXML
     private AnchorPane mainPane;
 
@@ -70,13 +82,18 @@ public final class MenuView {
             DifficultyLevel.values()
     );
 
-    public static void addInventory(InventoryItemRow inventory) {
-        gameStage.setScene(new Scene(inventory));
-        gameStage.show();
-    }
-
     @FXML
     private void startGame(ActionEvent event) throws IOException {
+        new ChatApplication();
+
+        String host = hostTextField.getText();
+        String username = usernameTextField.getText();
+        int port = Integer.parseInt(portTextField.getText());
+
+        UserConfig config = new UserConfig(username, host, port);
+        getChatApplication().setUserConfig(config);
+        getChatApplication().startChat();
+
         gameStage = new Stage(StageStyle.DECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dslite/gamescreen.fxml"));
         Parent root = fxmlLoader.load();
@@ -155,7 +172,8 @@ public final class MenuView {
     }
 
     private Stage getStage(Node node) {
-        return stage = (Stage) node.getScene().getWindow();
+        stage = (Stage) node.getScene().getWindow();
+        return stage;
     }
 
     public static int getSizeX() {

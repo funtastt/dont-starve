@@ -1,6 +1,7 @@
-package dslite.ui.views;
+package dslite.controllers;
 
 
+import dslite.ui.chat.ChatView;
 import dslite.ui.crafting.CraftingView;
 import dslite.ui.inventory.InventoryItemRow;
 import dslite.player.Player;
@@ -13,11 +14,13 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public final class GameView {
+import static dslite.ui.chat.ChatApplication.getChatApplication;
+
+public final class GameController {
     @FXML
     private StackPane mainPane;
     private static World world;
@@ -29,6 +32,8 @@ public final class GameView {
 
     private InventoryItemRow inventory;
     private CraftingView craftingView;
+
+    private ChatView chatView;
 
     @FXML
     public void initialize() {
@@ -43,6 +48,8 @@ public final class GameView {
 
         craftingView = new CraftingView();
 
+        chatView =  getChatApplication().getChatView();
+
         VBox inventoryContainer = new VBox();
         inventoryContainer.getChildren().add(inventory);
         inventoryContainer.setAlignment(Pos.BOTTOM_CENTER);
@@ -52,14 +59,25 @@ public final class GameView {
 
         characteristics.setAlignment(Pos.TOP_RIGHT);
 
+        VBox chatContainer = new VBox();
+        chatContainer.getChildren().add(chatView);
+        chatContainer.setAlignment(Pos.BOTTOM_LEFT);
+
         VBox gameContainer = new VBox();
         gameContainer.getChildren().add(gameScreen);
         gameContainer.setAlignment(Pos.CENTER);
-        mainPane.getChildren().addAll(gameContainer, inventoryContainer, craftingView, characteristics);
+        mainPane.getChildren().addAll(gameContainer, inventoryContainer, craftingView, characteristics, chatContainer);
+
+        mainPane.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            if (!chatView.getBoundsInParent().contains(mouseEvent.getX(), mouseEvent.getY())) {
+                chatView.requestFocus();
+            }
+        });
 
         setKeyListener();
         enableView();
     }
+
 
     private void setKeyListener() {
         keyHandler = keyEvent -> {
@@ -70,8 +88,8 @@ public final class GameView {
                 case A, LEFT -> player.move(-1, 0);
                 case S, DOWN -> player.move(0, 1);
                 case D, RIGHT -> player.move(1, 0);
-                case C -> changeCraftViewVisibility();
-                case F12 -> MenuView.setGameStageFullScreen();
+                case I -> changeCraftViewVisibility();
+                case F12 -> MenuController.setGameStageFullScreen();
                 case SPACE -> player.interact();
                 case F -> player.place();
                 case ESCAPE -> {

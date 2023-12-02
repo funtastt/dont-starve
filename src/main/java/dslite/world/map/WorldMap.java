@@ -3,8 +3,8 @@ package dslite.world.map;
 import dslite.GameLauncher;
 import dslite.utils.enums.*;
 import dslite.ui.tiles.TileWithObject;
-import dslite.ui.views.GameView;
-import dslite.ui.views.MenuView;
+import dslite.controllers.GameController;
+import dslite.controllers.MenuController;
 import dslite.ui.tiles.Tile;
 import dslite.utils.interfaces.Updatable;
 import dslite.world.entity.MapObject;
@@ -34,7 +34,7 @@ public final class WorldMap {
         List<Biome> biomes = new ArrayList<>();
         Set<Point> biomePoints = new HashSet<>();
 
-        BiomeSize size = BiomeSize.getBiomeSize(MenuView.getBiomeSize());
+        BiomeSize size = BiomeSize.getBiomeSize(MenuController.getBiomeSize());
         int biomeNum = (int) (size.getFreq() * width * height) + GameLauncher.RANDOM.nextInt(size.getExtra());
 
         while (biomePoints.size() < biomeNum) {
@@ -79,7 +79,7 @@ public final class WorldMap {
                 ((Updatable) obj).update();
             }
         }
-        GameView.getGameScreen().drawPlayer(GameView.getPlayer());
+        GameController.getGameScreen().drawPlayer(GameController.getPlayer());
     }
 
     private void initTilemap(TileType type) {

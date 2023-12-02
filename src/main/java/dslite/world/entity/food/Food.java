@@ -2,7 +2,7 @@ package dslite.world.entity.food;
 
 import dslite.player.Player;
 import dslite.player.inventory.Inventory;
-import dslite.ui.views.GameView;
+import dslite.controllers.GameController;
 import dslite.utils.enums.ItemType;
 import dslite.world.entity.Item;
 
@@ -22,21 +22,21 @@ public abstract class Food extends Item {
     }
 
     public void eat() {
-        Player player = GameView.getPlayer();
+        Player player = GameController.getPlayer();
         player.addSatiety(foodValue);
         player.addHealth(healthValue);
         player.addSanity(sanityValue);
     }
 
     public void cook() {
-        Inventory inv = GameView.getPlayer().getInventory();
+        Inventory inv = GameController.getPlayer().getInventory();
         if (cookedForm == null) return;
 
         if (inv.removeItemByType(getType(),1) == 1) {
             if (!inv.addItem(cookedForm.getType(),1)) {
                 inv.addItem(getType(),1);
             }
-            GameView.getPlayer().decreaseActions(1);
+            GameController.getPlayer().decreaseActions(1);
         }
     }
 }
