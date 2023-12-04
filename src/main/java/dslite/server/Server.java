@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Server {
-
     private ServerSocket serverSocket;
     private List<Client> clients = new ArrayList<>();
 

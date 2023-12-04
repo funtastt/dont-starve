@@ -1,7 +1,7 @@
 package dslite.controllers;
 
-import dslite.ui.chat.ChatApplication;
 import dslite.client.UserConfig;
+import dslite.ui.chat.ChatView;
 import dslite.utils.enums.BiomeSize;
 import dslite.utils.enums.DifficultyLevel;
 import dslite.utils.enums.MapSize;
@@ -29,7 +29,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Objects;
 
-import static dslite.ui.chat.ChatApplication.getChatApplication;
 import static dslite.world.map.WorldMap.MAX_FREQ;
 
 public final class MenuController {
@@ -84,15 +83,15 @@ public final class MenuController {
 
     @FXML
     private void startGame(ActionEvent event) throws IOException {
-        new ChatApplication();
+        ChatView chatView = new ChatView();
 
         String host = hostTextField.getText();
         String username = usernameTextField.getText();
         int port = Integer.parseInt(portTextField.getText());
 
         UserConfig config = new UserConfig(username, host, port);
-        getChatApplication().setUserConfig(config);
-        getChatApplication().startChat();
+        chatView.setUserConfig(config);
+        chatView.startChat();
 
         gameStage = new Stage(StageStyle.DECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/dslite/gamescreen.fxml"));

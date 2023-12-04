@@ -1,20 +1,18 @@
 package dslite.client;
 
 
-import dslite.ui.chat.ChatApplication;
-
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
+import static dslite.ui.chat.ChatView.getChatView;
+
 public class Client {
 
-    private ChatApplication application;
     private Socket socket;
     private ClientThread thread;
 
-    public Client(ChatApplication application) {
-        this.application = application;
+    public Client() {
     }
 
     public void sendMessage(String message) {
@@ -27,9 +25,9 @@ public class Client {
     }
 
     public void start() {
-        String username = application.getUserConfig().getUsername();
-        String host = application.getUserConfig().getHost();
-        int port = application.getUserConfig().getPort();
+        String username = getChatView().getUserConfig().getUsername();
+        String host = getChatView().getUserConfig().getHost();
+        int port = getChatView().getUserConfig().getPort();
 
         BufferedReader input;
         BufferedWriter output;
@@ -45,10 +43,6 @@ public class Client {
         new Thread(thread).start();
 
         sendMessage("Hello! " + username + " just joined us!\n");
-    }
-
-    public ChatApplication getApplication() {
-        return application;
     }
 
     static class ClientThread implements Runnable {
@@ -68,7 +62,7 @@ public class Client {
             try {
                 while (true) {
                     String message = input.readLine() + "\n";
-                    chatClient.getApplication().appendMessage(message);
+                    getChatView().appendMessage(message);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

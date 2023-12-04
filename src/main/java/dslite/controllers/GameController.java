@@ -18,7 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import static dslite.ui.chat.ChatApplication.getChatApplication;
+import static dslite.ui.chat.ChatView.getChatView;
 
 public final class GameController {
     @FXML
@@ -48,7 +48,7 @@ public final class GameController {
 
         craftingView = new CraftingView();
 
-        chatView =  getChatApplication().getChatView();
+        chatView =  getChatView();
 
         VBox inventoryContainer = new VBox();
         inventoryContainer.getChildren().add(inventory);
