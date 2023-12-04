@@ -1,9 +1,11 @@
 package dslite.client;
 
-
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
+
+import dslite.protocol.Message;
+import dslite.protocol.MessageType;
+import dslite.protocol.MessageProtocol;
 
 import static dslite.ui.chat.ChatView.getChatView;
 
@@ -12,12 +14,11 @@ public class Client {
     private Socket socket;
     private ClientThread thread;
 
-    public Client() {
-    }
-
-    public void sendMessage(String message) {
+    public void sendMessage(String content) {
+        Message message = new Message(MessageType.CHAT, content);
         try {
-            thread.getOutput().write(message);
+            byte[] encodedMessage = MessageProtocol.encodeMessage(message);
+            thread.getOutput().write(encodedMessage);
             thread.getOutput().flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -29,12 +30,12 @@ public class Client {
         String host = getChatView().getUserConfig().getHost();
         int port = getChatView().getUserConfig().getPort();
 
-        BufferedReader input;
-        BufferedWriter output;
+        DataInputStream input;
+        DataOutputStream output;
         try {
             socket = new Socket(host, port);
-            input = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
-            output = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
+            input = new DataInputStream(socket.getInputStream());
+            output = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -47,11 +48,11 @@ public class Client {
 
     static class ClientThread implements Runnable {
 
-        private BufferedReader input;
-        private BufferedWriter output;
+        private DataInputStream input;
+        private DataOutputStream output;
         private Client chatClient;
 
-        public ClientThread(BufferedReader input, BufferedWriter output, Client chatClient) {
+        public ClientThread(DataInputStream input, DataOutputStream output, Client chatClient) {
             this.input = input;
             this.output = output;
             this.chatClient = chatClient;
@@ -61,15 +62,20 @@ public class Client {
         public void run() {
             try {
                 while (true) {
-                    String message = input.readLine() + "\n";
-                    getChatView().appendMessage(message);
+                    byte[] data = new byte[1024];
+                    int bytesRead = input.read(data);
+                    if (bytesRead == -1) {
+                        break;
+                    }
+                    Message message = MessageProtocol.decodeMessage(data);
+                    getChatView().appendMessage((String) message.getContent());
                 }
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        public BufferedWriter getOutput() {
+        public DataOutputStream getOutput() {
             return output;
         }
     }

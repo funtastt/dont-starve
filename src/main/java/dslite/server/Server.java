@@ -3,9 +3,11 @@ package dslite.server;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import dslite.protocol.Message;
+import dslite.protocol.MessageProtocol;
 
 public class Server {
     private ServerSocket serverSocket;
@@ -16,8 +18,8 @@ public class Server {
             serverSocket = new ServerSocket(5555);
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
-                BufferedWriter output = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream(), StandardCharsets.UTF_8));
+                DataInputStream input = new DataInputStream(clientSocket.getInputStream());
+                DataOutputStream output = new DataOutputStream(clientSocket.getOutputStream());
 
                 Client client = new Client(input, output, this);
                 clients.add(client);
@@ -26,18 +28,18 @@ public class Server {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    public void sendMessage(String message, Client client) {
-        for (Client c : clients) {
-            if (c.equals(client)) {
+    public void sendMessage(Message message, Client sender) {
+        for (Client reciever : clients) {
+            if (reciever.equals(sender)) {
                 continue;
             }
 
             try {
-                c.getOutput().write(message + "\n");
-                c.getOutput().flush();
+                byte[] encoded = MessageProtocol.encodeMessage(message);
+                reciever.getOutput().write(encoded);
+                reciever.getOutput().flush();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -51,11 +53,11 @@ public class Server {
 
     static class Client implements Runnable {
 
-        private BufferedReader input;
-        private BufferedWriter output;
+        private DataInputStream input;
+        private DataOutputStream output;
         private Server server;
 
-        public Client(BufferedReader input, BufferedWriter output, Server chatServer) {
+        public Client(DataInputStream input, DataOutputStream output, Server chatServer) {
             this.input = input;
             this.output = output;
             this.server = chatServer;
@@ -65,15 +67,20 @@ public class Server {
         public void run() {
             try {
                 while (true) {
-                    String message = input.readLine();
+                    byte[] data = new byte[1024];  // настройте размер по необходимости
+                    int bytesRead = input.read(data);
+                    if (bytesRead == -1) {
+                        break;
+                    }
+                    Message message = MessageProtocol.decodeMessage(data);
                     server.sendMessage(message, this);
                 }
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        public BufferedWriter getOutput() {
+        public DataOutputStream getOutput() {
             return output;
         }
     }
